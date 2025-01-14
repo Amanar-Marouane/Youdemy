@@ -1,4 +1,5 @@
 <?php include __DIR__ . "/partial/header.view.php" ?>
+<?php include __DIR__ . "/partial/nav.view.php" ?>
 
 <div class="pt-20">
     <div class="relative isolate px-6 pt-14 lg:px-8">
