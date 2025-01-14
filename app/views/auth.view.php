@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/partial/header.view.php" ?>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col items-center justify-center">
     <div class="container mx-auto px-4 h-full">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-4/12">
@@ -34,6 +34,8 @@
                         <p class="text-center mt-6 text-gray-400">
                             Don't have an account?
                             <button class="toggle-form text-indigo-500 hover:text-indigo-400 font-medium">Register</button>
+                            Or
+                            <a href="/home"><button class="toggle-form text-indigo-500 hover:text-indigo-400 font-medium">Get Back Home</button></a>
                         </p>
                     </div>
 
@@ -77,6 +79,8 @@
                         <p class="text-center mt-6 text-gray-400">
                             Already have an account?
                             <button class="toggle-form text-indigo-500 hover:text-indigo-400 font-medium">Sign In</button>
+                            Or
+                            <a href="/home"><button class="toggle-form text-indigo-500 hover:text-indigo-400 font-medium">Get Back Home</button></a>
                         </p>
                     </div>
                 </div>
