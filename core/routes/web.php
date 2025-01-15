@@ -1,5 +1,10 @@
 <?php
 return [
-    "home" => "home.view.php",
-    "auth" => "auth.view.php",
+    "home" => "views/home.view.php",
+    "auth" => "views/auth.view.php",
+    "create" => [
+        "path" => "controllers/authController.php",
+        "class" => "authController",
+        "method" => "create",
+    ],
 ];

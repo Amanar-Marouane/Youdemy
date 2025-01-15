@@ -44,10 +44,10 @@
                             <h1 class="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">Join Youdemy</h1>
                             <p class="text-gray-400 mt-2">Create your account</p>
                         </div>
-                        <form>
+                        <form method="POST" action="/create">
                             <div class="mb-6">
                                 <label class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
-                                <input type="text" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <input type="text" name="fullname" id="fullname" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                             </div>
                             <div class="mb-6">
                                 <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
@@ -102,6 +102,8 @@
                 $(this).toggleClass('text-indigo-500');
             });
         });
+
+        let 
     </script>
 </body>
 
