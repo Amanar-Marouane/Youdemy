@@ -7,4 +7,5 @@ return [
         "class" => "authController",
         "method" => "create",
     ],
+    "profile" => "views/profile.view.php",
 ];

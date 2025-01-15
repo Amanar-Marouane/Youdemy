@@ -28,6 +28,9 @@
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Teachers</a>
                         </li>
+                        <li>
+                            <a href="/profile" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
+                        </li>
                     </ul>
                 </div>
             </div>
