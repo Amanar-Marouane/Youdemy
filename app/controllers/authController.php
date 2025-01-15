@@ -6,6 +6,7 @@ class authController
 
     public function create()
     {
+        $password = $_POST['password'];
         $acc_type = $_POST["acc_type"];
         $status = "Activated";
         $profile_img = __DIR__ . "/../../public/assets/student.jfif";
@@ -13,6 +14,9 @@ class authController
             $status = "Pending";
             $profile_img = __DIR__ . "/../../public/assets/teacher.jfif";
         }
-        Auth::inscribe($_POST['fullname'], $_POST['email'], $acc_type, $password, $status, $profile_img);
+        if (Auth::inscribe($_POST['fullname'], $_POST['email'], $acc_type, $password, $status, $profile_img)) {
+            // error"something went wrong try again"
+        }
+        header("Location: /auth");
     }
 }
