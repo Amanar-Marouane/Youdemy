@@ -1,4 +1,4 @@
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-900 text-gray-100 select-none">
     <header>
         <nav class="fixed w-full z-20 top-0 start-0 bg-gray-900 border-b border-gray-800">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

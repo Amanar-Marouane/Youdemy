@@ -2,7 +2,7 @@
 return [
     "home" => "views/home.view.php",
     "auth" => "views/auth.view.php",
-    "create" => [
+    "auth/create" => [
         "path" => "controllers/authController.php",
         "class" => "authController",
         "method" => "create",
