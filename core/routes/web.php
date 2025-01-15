@@ -2,10 +2,10 @@
 return [
     "home" => "views/home.view.php",
     "auth" => "views/auth.view.php",
-    "auth/create" => [
+    "auth/register" => [
         "path" => "controllers/authController.php",
         "class" => "authController",
-        "method" => "create",
+        "method" => "register",
     ],
     "profile" => "views/profile.view.php",
 ];

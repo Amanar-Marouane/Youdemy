@@ -52,7 +52,7 @@
                             <p class="error-message1 mt-1 text-sm text-red-500">
                             </p>
                         </div>
-                        <form method="POST" action="/auth/create" class="registerForm">
+                        <form method="POST" action="/auth/register" class="registerForm">
                             <div class="mb-6">
                                 <label class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
                                 <input type="text" name="fullname" id="fullname" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">

@@ -4,7 +4,7 @@ require_once __DIR__ . "/../models/Auth.php";
 class authController
 {
 
-    public function create()
+    public function register()
     {
         $password = $_POST['password'];
         $acc_type = $_POST["acc_type"];
