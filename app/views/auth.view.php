@@ -122,14 +122,14 @@
         let error_message0 = document.querySelector(".error-message0");
         let error_message1 = document.querySelector(".error-message1");
         let error_fullname = document.querySelector(".error-fullname");
-        const fullNameRegex = /^[A-Za-z]{4,50}(?: [A-Za-z]+)*$/;
+        const fullNameRegex = /^[A-Za-z]{2,50}(?: [A-Za-z]+)*$/;
         let fullnameInput = document.querySelector("#fullname");
         const emailRegex = /^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}$/;
         let error_email0 = document.querySelector(".error-email0");
         let error_email1 = document.querySelector(".error-email1");
         let emailInput0 = document.querySelector("#email0");
         let emailInput1 = document.querySelector("#email1");
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
         let error_password0 = document.querySelector(".error-password0");
         let error_password1 = document.querySelector(".error-password1");
         let passwordInput0 = document.querySelector("#password0");
@@ -197,7 +197,7 @@
             error_message.innerHTML = "";
 
             if (!passwordRegex.test(value)) {
-                error_message.innerHTML = "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one digit!";
+                error_message.innerHTML = "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character (!@#$%^&*)!";
                 passwordInput.classList.add("border-red-500", "focus:ring-red-500");
                 passwordInput.classList.remove("focus:ring-indigo-500", "border-gray-600");
                 return false;
