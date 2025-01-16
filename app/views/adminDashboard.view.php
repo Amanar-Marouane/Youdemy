@@ -44,30 +44,31 @@
 
 
     <main class="flex-1 p-6">
+        <?php extract($overview) ?>
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Courses</h3>
-                <p class="text-3xl font-bold text-red-300">1,250</p>
+                <p class="text-3xl font-bold text-red-300"><?= $total_courses ?></p>
             </div>
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Users</h3>
-                <p class="text-3xl font-bold text-green-300">500</p>
+                <p class="text-3xl font-bold text-green-300"><?= $total_users ?></p>
             </div>
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Pending Accounts</h3>
-                <p class="text-3xl font-bold text-yellow-300">75</p>
+                <p class="text-3xl font-bold text-yellow-300"><?= $total_pending ?></p>
             </div>
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Teachers</h3>
-                <p class="text-3xl font-bold text-blue-300">5,400</p>
+                <p class="text-3xl font-bold text-blue-300"><?= $total_teachers ?></p>
             </div>
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Students</h3>
-                <p class="text-3xl font-bold text-red-300">50,400</p>
+                <p class="text-3xl font-bold text-red-300"><?= $total_students ?></p>
             </div>
         </section>
 
@@ -93,20 +94,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-gray-700">
-                                <td class="px-4 py-3">John Doe</td>
-                                <td class="px-4 py-3">john.doe@example.com</td>
-                                <td class="px-4 py-3">Jan 15, 2024</td>
-                                <td class="px-4 py-3">
-                                    <span class="bg-amber-900 text-amber-300 text-xs font-medium px-2.5 py-0.5 rounded">Pending</span>
-                                </td>
-                                <td class="px-4 py-3">
-                                    <div class="flex gap-2">
-                                        <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
-                                        <button class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php foreach ($pending_accounts as $acc):
+                                extract($acc) ?>
+                                <tr class="border-b border-gray-700">
+                                    <td class="px-4 py-3"><?= $full_name ?></td>
+                                    <td class="px-4 py-3"><?= $email ?></td>
+                                    <td class="px-4 py-3"><?= $created_at ?></td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-amber-900 text-amber-300 text-xs font-medium px-2.5 py-0.5 rounded">Pending</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex gap-2">
+                                            <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
+                                            <button class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -134,30 +138,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-gray-700">
-                                <td class="px-4 py-3">Sarah Smith</td>
-                                <td class="px-4 py-3">sarah.smith@example.com</td>
-                                <td class="px-4 py-3">Teacher</td>
-                                <td class="px-4 py-3">Jan 10, 2024</td>
-                                <td class="px-4 py-3">
-                                    <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
-                                </td>
-                                <td class="px-4 py-3">
-                                    <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-700">
-                                <td class="px-4 py-3">Mike Johnson</td>
-                                <td class="px-4 py-3">mike.j@example.com</td>
-                                <td class="px-4 py-3">Student</td>
-                                <td class="px-4 py-3">Jan 12, 2024</td>
-                                <td class="px-4 py-3">
-                                    <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
-                                </td>
-                                <td class="px-4 py-3">
-                                    <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
-                                </td>
-                            </tr>
+                            <?php foreach ($sespended_accounts as $acc):
+                                extract($acc) ?>
+                                <tr class="border-b border-gray-700">
+                                    <td class="px-4 py-3"><?= $full_name ?></td>
+                                    <td class="px-4 py-3"><?= $email ?></td>
+                                    <td class="px-4 py-3"><?= $acc_type ?></td>
+                                    <td class="px-4 py-3"><?= $suspension_date ?></td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

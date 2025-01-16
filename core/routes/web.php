@@ -22,5 +22,9 @@ return [
         "class" => "userController",
         "method" => "logout",
     ],
-    "dashboard/admin" => "views/adminDashboard.view.php",
+    "dashboard/admin" => [
+        "path" => "controllers/userController.php",
+        "class" => "userController",
+        "method" => "adminDashboardRendering",
+    ],
 ];

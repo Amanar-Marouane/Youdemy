@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../models/User.php";
+require_once __DIR__ . "/../models/Admin.php";
 require_once __DIR__ . "/../../core/Functions.php";
 
 class userController
@@ -64,5 +65,13 @@ class userController
         $row = User::profileRendering($user_id);
         extract($row);
         include __DIR__ . "/../views/profile.view.php";
+    }
+
+    public function adminDashboardRendering(){
+        if($info = Admin::adminDashboardRendering()){
+            // dd($info);
+            extract($info);
+            include __DIR__ . "/../views/adminDashboard.view.php";
+        }
     }
 }
