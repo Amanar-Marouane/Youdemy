@@ -67,11 +67,22 @@ class userController
         include __DIR__ . "/../views/profile.view.php";
     }
 
-    public function adminDashboardRendering(){
-        if($info = Admin::adminDashboardRendering()){
-            // dd($info);
+    public function adminDashboardRendering()
+    {
+        if ($info = Admin::adminDashboardRendering()) {
             extract($info);
             include __DIR__ . "/../views/adminDashboard.view.php";
         }
+    }
+
+    public function accountValidation()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        $user_id = (int) $data['user_id'];
+        $action = $data['action'];
+
+        if ($action === "approve") Admin::accountActivation($user_id);
+        else Admin::accountDeletion($user_id);
     }
 }

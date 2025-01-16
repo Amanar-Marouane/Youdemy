@@ -21,8 +21,9 @@ function emailValidation($email)
     return false;
 }
 
-function passwordValidation($password){
-    if (!empty($password)){
+function passwordValidation($password)
+{
+    if (!empty($password)) {
         if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/", $password)) {
             return $password;
         }
@@ -30,8 +31,9 @@ function passwordValidation($password){
     return false;
 }
 
-function fullnameValidation($fullname){
-    if (!empty($fullname)){
+function fullnameValidation($fullname)
+{
+    if (!empty($fullname)) {
         if (preg_match("/^[A-Za-z]{2,50}(?: [A-Za-z]+)*$/", $fullname)) {
             return $fullname;
         }

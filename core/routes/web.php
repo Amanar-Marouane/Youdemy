@@ -27,4 +27,9 @@ return [
         "class" => "userController",
         "method" => "adminDashboardRendering",
     ],
+    "account/validation" => [
+        "path" => "controllers/userController.php",
+        "class" => "userController",
+        "method" => "accountValidation",
+    ]
 ];

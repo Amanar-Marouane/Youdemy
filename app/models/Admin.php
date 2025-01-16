@@ -8,6 +8,7 @@ class Admin extends User
     public static function adminDashboardRendering()
     {
         $info = [];
+        $secret_key = "analikayn";
 
         $overwiew = "SELECT COUNT(course_id) AS total_courses, 
                     (SELECT COUNT(user_id) FROM users) AS total_users, 
@@ -18,12 +19,27 @@ class Admin extends User
         $instance = Db::getInstance();
         $info["overview"] = $instance->fetch($overwiew);
 
-        $pending_accounts = "SELECT full_name, email, created_at FROM users WHERE acc_status = 'Pending';";
+        $pending_accounts = "SELECT user_id, full_name, email, created_at FROM users WHERE acc_status = 'Pending';";
         $info["pending_accounts"] = $instance->fetchAll($pending_accounts);
 
-        $sespended_accounts = "SELECT full_name, email, acc_type, suspension_date FROM users WHERE acc_status = 'Suspended';";
+        $sespended_accounts = "SELECT user_id, full_name, email, acc_type, suspension_date FROM users WHERE acc_status = 'Suspended';";
         $info["sespended_accounts"] = $instance->fetchAll($sespended_accounts);
+        // dd($info['sespended_accounts']);
 
         return $info;
+    }
+
+    public static function accountDeletion($user_id){
+        $stmt = "DELETE FROM users WHERE user_id = ?";
+        $bindParam = [$user_id];
+        $instance = Db::getInstance();
+        return $instance->query($stmt, $bindParam);
+    }
+
+    public static function accountActivation($user_id){
+        $stmt = "UPDATE users set acc_status = 'Activated' WHERE user_id = ?";
+        $bindParam = [$user_id];
+        $instance = Db::getInstance();
+        return $instance->query($stmt, $bindParam);
     }
 }

@@ -1,7 +1,7 @@
 <?php include __DIR__ . "/partial/header.view.php" ?>
 <?php include __DIR__ . "/partial/nav.view.php" ?>
 
-<div class="min-h-[90vh] flex items-start py-32 sm:py-48 lg:py-20 text-center">
+<div class="min-h-[90vh] flex items-start py-32 sm:py-48 lg:py-20 text-center html">
     <aside class="w-64 bg-gray-800 rounded-lg shadow-lg">
         <nav class="p-4">
             <ul class="space-y-2">
@@ -93,7 +93,7 @@
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="pending-table">
                             <?php foreach ($pending_accounts as $acc):
                                 extract($acc) ?>
                                 <tr class="border-b border-gray-700">
@@ -105,8 +105,11 @@
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex gap-2">
-                                            <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
-                                            <button class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
+                                            <form id="validationForm">
+                                                <input type="hidden" id="user_id" value="<?= $user_id ?>">
+                                                <button name="action" value="approve" type="submit" class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
+                                                <button name="action" value="reject" type="submit" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -149,7 +152,10 @@
                                         <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
                                     </td>
                                     <td class="px-4 py-3">
-                                        <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                        <form action="/account/reactivation" method="POST">
+                                            <input type="hidden" value="<?= $user_id ?>">
+                                            <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -162,3 +168,33 @@
 </div>
 
 <?php include __DIR__ . "/partial/footer.view.php" ?>
+
+<script>
+    function ajaxRequest(action, user_id, target_element, route) {
+        $.ajax({
+            url: route,
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                action: action,
+                user_id: user_id,
+            }),
+            success: function() {
+                target_element.remove();
+            },
+            error: function() {
+                $('.error-p').html("Something went wrong, Try again");
+            }
+        })
+    }
+
+    $(document).ready(function() {
+        $(document).on('submit', function(e) {
+            e.preventDefault();
+
+            const action = $(document.activeElement).val();
+            const user_id = $(document.activeElement).closest('form').find('#user_id').val();
+            ajaxRequest(action, user_id, $(document.activeElement).closest('tr'), "/account/validation");
+        })
+    });
+</script>

@@ -46,7 +46,7 @@
                 </div>
             </div>
         </nav>
-        <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center">
+        <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center error-p">
             <?= $_SESSION['error']; ?>
         </p>
     </header>
