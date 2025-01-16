@@ -1,6 +1,9 @@
 <?php include __DIR__ . "/partial/header.view.php" ?>
 
 <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col items-center justify-center select-none">
+    <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center">
+        <?= $_SESSION['error']; ?>
+    </p>
     <div class="container mx-auto px-4 h-full">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-4/12">

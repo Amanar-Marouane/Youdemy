@@ -18,12 +18,12 @@ class Auth
         $bindParam = [$email];
         $pdo = Db::getInstance();
         if (!$row = $pdo->fetch($stmt, $bindParam)) {
-            return false; //email not exist!
+            return false;
         }
         $hashedPassword = $row["password"];
 
         if (!password_verify($password, $hashedPassword)) {
-            return false; //password false
+            return false;
         }
         return $row;
     }

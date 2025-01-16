@@ -21,5 +21,6 @@ return [
         "path" => "controllers/authController.php",
         "class" => "authController",
         "method" => "logout",
-    ]
+    ],
+    "dashboard/admin" => "views/adminDashboard.view.php",
 ];

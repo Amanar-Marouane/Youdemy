@@ -1,5 +1,5 @@
 <?php
-if(PHP_SESSION_NONE)session_start();
+if (PHP_SESSION_NONE) session_start();
 require_once __DIR__ . "/Functions.php";
 class Router
 {
@@ -8,6 +8,9 @@ class Router
     {
         $uri = getURI();
         $routes = require_once __DIR__ . "/routes/web.php";
+        if (!isset($_SESSION['error'])) {
+            $_SESSION['error'] = "";
+        }
 
         if (key_exists($uri, $routes)) {
             if (is_array($routes[$uri])) {

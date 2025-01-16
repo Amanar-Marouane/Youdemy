@@ -8,19 +8,20 @@ class authController
     public function register()
     {
         $fullname = fullnameValidation($_POST['fullname']);
-        if(passwordValidation($_POST['password'])){
+        if (passwordValidation($_POST['password'])) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         }
         $email = emailValidation($_POST['email']);
         $acc_type = $_POST["acc_type"];
         $status = "Activated";
-        $profile_img = "\assets\student.png";
+        $profile_img = "https://media1.giphy.com/media/xUNd9AWlNxNgnxiIxO/200.webp?cid=790b7611t1g2yq5q33qrlqd4nwu34ijz68j6lmyg3abln5da&ep=v1_gifs_search&rid=200.webp&ct=g";
         if ($acc_type === "Teacher") {
             $status = "Pending";
-            $profile_img = "\assets\\teacher.png";
+            $profile_img = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRueHhlYnp3cmVkZWE3aGh6bnh3dWVxdzRtamMzMXgwenJkZmZ4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vVKqa0NMZzFyE/200.webp";
         }
         if (!Auth::inscribe($fullname, $email, $acc_type, $password, $status, $profile_img)) {
-            die("error something went wrong");
+            $_SESSION['error'] = "error something went wrong";
+            header("Location: /auth");
         }
         header("Location: /auth");
     }
@@ -31,16 +32,25 @@ class authController
         $email = emailValidation($_POST['email']);
 
         if (!$row = Auth::login($email, $password)) {
-            die("Check your info");
+            $_SESSION['error'] = "Check your info";
+            header("Location: /auth");
         }
         extract($row);
         $_SESSION['user_id'] = $user_id;
         $_SESSION['acc_type'] = $acc_type;
         $_SESSION['acc_status'] = $acc_status;
-        header("Location: /profile");
+        if ($_SESSION['acc_status'] === "Activated") {
+            header("Location: /profile");
+            $_SESSION['error'] = "";
+            exit();
+        }
+        if ($_SESSION['acc_status'] === "Pending") $_SESSION['error'] = "Your accout still pending, wait until it got approved!";
+        if ($_SESSION['acc_status'] === "Suspended") $_SESSION['error'] = "Your accout is suspend, Try contact the client servie or revise your self first!";
+        header("Location: /auth");
     }
 
-    public function logout(){
+    public function logout()
+    {
         session_destroy();
         header("Location: /auth");
     }

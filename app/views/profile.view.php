@@ -28,14 +28,6 @@
                             <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
                             <?= htmlspecialchars($acc_type) ?>
                         </span>
-                        <div class="mt-6">
-                            <button class="w-full lg:w-auto px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium rounded-xl shadow-lg hover:from-purple-600 hover:to-indigo-600 transition duration-300 flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                                </svg>
-                                View Dashboard
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

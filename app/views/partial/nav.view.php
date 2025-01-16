@@ -37,8 +37,16 @@
                                 <a href="/profile" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
                             </li>
                         <?php endif; ?>
+                        <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Admin"): ?>
+                            <li>
+                                <a href="/dashboard/admin" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
         </nav>
+        <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center">
+            <?= $_SESSION['error']; ?>
+        </p>
     </header>
