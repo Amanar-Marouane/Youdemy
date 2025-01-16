@@ -2,7 +2,7 @@
 <?php include __DIR__ . "/partial/nav.view.php" ?>
 
 <div class="min-h-[90vh] flex items-start py-32 sm:py-48 lg:py-20 text-center">
-<aside class="w-64 bg-gray-800 rounded-lg shadow-lg">
+    <aside class="w-64 bg-gray-800 rounded-lg shadow-lg">
         <nav class="p-4">
             <ul class="space-y-2">
                 <li>
@@ -68,6 +68,99 @@
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Students</h3>
                 <p class="text-3xl font-bold text-red-300">50,400</p>
+            </div>
+        </section>
+
+        <section class="space-y-6 mt-5">
+            <div class="bg-gray-800 rounded-lg">
+                <div class="p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Pending Teacher Approvals
+                    </h2>
+                </div>
+                <div class="p-4 overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs uppercase bg-gray-700">
+                            <tr>
+                                <th class="px-4 py-3">Name</th>
+                                <th class="px-4 py-3">Email</th>
+                                <th class="px-4 py-3">Join Date</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3">John Doe</td>
+                                <td class="px-4 py-3">john.doe@example.com</td>
+                                <td class="px-4 py-3">Jan 15, 2024</td>
+                                <td class="px-4 py-3">
+                                    <span class="bg-amber-900 text-amber-300 text-xs font-medium px-2.5 py-0.5 rounded">Pending</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex gap-2">
+                                        <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
+                                        <button class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg">
+                <div class="p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        Suspended Accounts
+                    </h2>
+                </div>
+                <div class="p-4 overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs uppercase bg-gray-700">
+                            <tr>
+                                <th class="px-4 py-3">Name</th>
+                                <th class="px-4 py-3">Email</th>
+                                <th class="px-4 py-3">Type</th>
+                                <th class="px-4 py-3">Suspension Date</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3">Sarah Smith</td>
+                                <td class="px-4 py-3">sarah.smith@example.com</td>
+                                <td class="px-4 py-3">Teacher</td>
+                                <td class="px-4 py-3">Jan 10, 2024</td>
+                                <td class="px-4 py-3">
+                                    <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3">Mike Johnson</td>
+                                <td class="px-4 py-3">mike.j@example.com</td>
+                                <td class="px-4 py-3">Student</td>
+                                <td class="px-4 py-3">Jan 12, 2024</td>
+                                <td class="px-4 py-3">
+                                    <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
     </main>
