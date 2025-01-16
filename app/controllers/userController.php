@@ -96,4 +96,15 @@ class userController
         if ($action === "activate") Admin::accountActivation($user_id);
         else Admin::accountDeletion($user_id);
     }
+    
+    public function accountSuspension()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        $user_id = (int) $data['user_id'];
+        $action = $data['action'];
+
+        if ($action === "suspend") Admin::accountSuspension($user_id);
+        else Admin::accountDeletion($user_id);
+    }
 }

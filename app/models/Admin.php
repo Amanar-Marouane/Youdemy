@@ -24,20 +24,32 @@ class Admin extends User
 
         $sespended_accounts = "SELECT user_id, full_name, email, acc_type, suspension_date FROM users WHERE acc_status = 'Suspended';";
         $info["sespended_accounts"] = $instance->fetchAll($sespended_accounts);
-        // dd($info['sespended_accounts']);
+
+        $activated_accounts = "SELECT user_id, full_name, email, acc_type, created_at FROM users WHERE acc_status = 'Activated' AND acc_type != 'Admin';";
+        $info["activated_accounts"] = $instance->fetchAll($activated_accounts);
 
         return $info;
     }
 
-    public static function accountDeletion($user_id){
+    public static function accountDeletion($user_id)
+    {
         $stmt = "DELETE FROM users WHERE user_id = ?";
         $bindParam = [$user_id];
         $instance = Db::getInstance();
         return $instance->query($stmt, $bindParam);
     }
 
-    public static function accountActivation($user_id){
+    public static function accountActivation($user_id)
+    {
         $stmt = "UPDATE users set acc_status = 'Activated' WHERE user_id = ?";
+        $bindParam = [$user_id];
+        $instance = Db::getInstance();
+        return $instance->query($stmt, $bindParam);
+    }
+
+    public static function accountSuspension($user_id)
+    {
+        $stmt = "UPDATE users set acc_status = 'Suspended' , suspension_date = CURRENT_TIMESTAMP WHERE user_id = ?";
         $bindParam = [$user_id];
         $instance = Db::getInstance();
         return $instance->query($stmt, $bindParam);

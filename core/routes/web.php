@@ -36,5 +36,9 @@ return [
         "path" => "controllers/userController.php",
         "class" => "userController",
         "method" => "accountActivation",
-    ]
+    ],"account/suspension" => [
+        "path" => "controllers/userController.php",
+        "class" => "userController",
+        "method" => "accountSuspension",
+    ],
 ];
