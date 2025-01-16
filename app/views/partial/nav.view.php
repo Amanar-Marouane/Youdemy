@@ -6,7 +6,11 @@
                     <span class="self-center text-2xl font-semibold text-indigo-500">Youdemy</span>
                 </a>
                 <div class="flex md:order-2 space-x-3">
-                    <a href="/auth"><button type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-800 font-medium rounded-lg text-sm px-4 py-2">Get Started</button></a>
+                    <?php if (!isset($_SESSION['user_id'])): ?>
+                        <a href="/auth" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+                    <?php else: ?>
+                        <a href="/logout" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Log Out</a>
+                    <?php endif; ?>
                     <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
                         <span class="sr-only">Open main menu</span>
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -28,9 +32,11 @@
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Teachers</a>
                         </li>
-                        <li>
-                            <a href="/profile" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
-                        </li>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <li>
+                                <a href="/profile" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>

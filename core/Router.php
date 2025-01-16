@@ -1,4 +1,5 @@
 <?php
+if(PHP_SESSION_NONE)session_start();
 require_once __DIR__ . "/Functions.php";
 class Router
 {

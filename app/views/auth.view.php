@@ -12,7 +12,7 @@
                             <p class="error-message0 mt-1 text-sm text-red-500">
                             </p>
                         </div>
-                        <form class="signinForm">
+                        <form class="signinForm" method="POST" action="/auth/login">
                             <div class="mb-6">
                                 <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
                                 <input type="text" name="email" id="email0" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">

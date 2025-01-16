@@ -13,20 +13,20 @@
                         <div class="relative">
                             <img
                                 class="w-40 h-40 rounded-full object-cover border-4 border-gray-800"
-                                src="\assets\teacher.png"
+                                src="<?= htmlspecialchars($profile_img) ?>"
                                 alt="Profile picture">
                             <div class="absolute bottom-3 right-3 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-800"></div>
                         </div>
                     </div>
                     <div class="flex-1 text-center lg:text-left space-y-4">
                         <div>
-                            <h1 class="text-3xl font-bold text-white mb-2">John Doe</h1>
-                            <p class="text-gray-400 text-lg">john.doe@example.com</p>
+                            <h1 class="text-3xl font-bold text-white mb-2"><?= htmlspecialchars($full_name) ?></h1>
+                            <p class="text-gray-400 text-lg"><?= htmlspecialchars($email) ?></p>
                         </div>
 
                         <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg">
                             <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
-                            Student
+                            <?= htmlspecialchars($acc_type) ?>
                         </span>
                         <div class="mt-6">
                             <button class="w-full lg:w-auto px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium rounded-xl shadow-lg hover:from-purple-600 hover:to-indigo-600 transition duration-300 flex items-center justify-center gap-2">

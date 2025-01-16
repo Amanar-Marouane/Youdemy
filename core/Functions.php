@@ -24,7 +24,7 @@ function emailValidation($email)
 function passwordValidation($password){
     if (!empty($password)){
         if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/", $password)) {
-            return password_hash($password, PASSWORD_DEFAULT);
+            return $password;
         }
     }
     return false;

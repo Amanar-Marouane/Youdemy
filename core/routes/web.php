@@ -7,5 +7,19 @@ return [
         "class" => "authController",
         "method" => "register",
     ],
-    "profile" => "views/profile.view.php",
+    "auth/login" => [
+        "path" => "controllers/authController.php",
+        "class" => "authController",
+        "method" => "login",
+    ],
+    "profile" => [
+        "path" => "controllers/userController.php",
+        "class" => "userController",
+        "method" => "profileRendering",
+    ],
+    "logout" => [
+        "path" => "controllers/authController.php",
+        "class" => "authController",
+        "method" => "logout",
+    ]
 ];
