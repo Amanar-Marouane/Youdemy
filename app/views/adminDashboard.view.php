@@ -105,7 +105,7 @@
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex gap-2">
-                                            <form id="validationForm">
+                                            <form id="validationForm" action="/account/validation">
                                                 <input type="hidden" id="user_id" value="<?= $user_id ?>">
                                                 <button name="action" value="approve" type="submit" class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Approve</button>
                                                 <button name="action" value="reject" type="submit" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Reject</button>
@@ -152,9 +152,10 @@
                                         <span class="bg-red-900 text-red-300 text-xs font-medium px-2.5 py-0.5 rounded">Suspended</span>
                                     </td>
                                     <td class="px-4 py-3">
-                                        <form action="/account/reactivation" method="POST">
-                                            <input type="hidden" value="<?= $user_id ?>">
-                                            <button class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                        <form action="/account/reactivation">
+                                            <input type="hidden" id="user_id" value="<?= $user_id ?>">
+                                            <button name="action" value="activate" type="submit" class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">Reactivate</button>
+                                            <button name="action" value="delete" type="submit" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -194,7 +195,10 @@
 
             const action = $(document.activeElement).val();
             const user_id = $(document.activeElement).closest('form').find('#user_id').val();
-            ajaxRequest(action, user_id, $(document.activeElement).closest('tr'), "/account/validation");
+            const target_element = $(document.activeElement).closest('tr');
+            const route = $(document.activeElement).closest('form').attr("action");
+
+            ajaxRequest(action, user_id, target_element, route);
         })
     });
 </script>

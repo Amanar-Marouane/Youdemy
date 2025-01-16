@@ -31,5 +31,10 @@ return [
         "path" => "controllers/userController.php",
         "class" => "userController",
         "method" => "accountValidation",
+    ],
+    "account/reactivation" => [
+        "path" => "controllers/userController.php",
+        "class" => "userController",
+        "method" => "accountActivation",
     ]
 ];
