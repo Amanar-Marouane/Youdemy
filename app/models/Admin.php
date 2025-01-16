@@ -5,10 +5,10 @@ require_once __DIR__ . "/User.php";
 class Admin extends User
 {
 
-    public static function adminDashboardRendering()
+    public static function accountsDashboardRendering()
     {
         $info = [];
-        $secret_key = "analikayn";
+        $instance = Db::getInstance();
 
         $overwiew = "SELECT COUNT(course_id) AS total_courses, 
                     (SELECT COUNT(user_id) FROM users) AS total_users, 
@@ -16,7 +16,6 @@ class Admin extends User
                     (SELECT COUNT(user_id) FROM users WHERE acc_type = 'Teacher') AS total_teachers, 
                     (SELECT COUNT(user_id) FROM users WHERE acc_type = 'Student') AS total_students 
                     FROM courses;";
-        $instance = Db::getInstance();
         $info["overview"] = $instance->fetch($overwiew);
 
         $pending_accounts = "SELECT user_id, full_name, email, created_at FROM users WHERE acc_status = 'Pending';";

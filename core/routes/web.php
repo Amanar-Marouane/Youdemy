@@ -22,10 +22,10 @@ return [
         "class" => "userController",
         "method" => "logout",
     ],
-    "dashboard/admin" => [
+    "dashboard/accounts" => [
         "path" => "controllers/userController.php",
         "class" => "userController",
-        "method" => "adminDashboardRendering",
+        "method" => "accountsDashboardRendering",
     ],
     "account/validation" => [
         "path" => "controllers/userController.php",
@@ -36,9 +36,25 @@ return [
         "path" => "controllers/userController.php",
         "class" => "userController",
         "method" => "accountActivation",
-    ],"account/suspension" => [
+    ],
+    "account/suspension" => [
         "path" => "controllers/userController.php",
         "class" => "userController",
         "method" => "accountSuspension",
+    ],
+    "dashboard/categories" => [
+        "path" => "controllers/categoryController.php",
+        "class" => "categoryController",
+        "method" => "categoriesDashboardRendering",
+    ],
+    "dashboard/categories/delete" => [
+        "path" => "controllers/categoryController.php",
+        "class" => "categoryController",
+        "method" => "categoriesDeletion",
+    ],
+    "dashboard/categories/add" => [
+        "path" => "controllers/categoryController.php",
+        "class" => "categoryController",
+        "method" => "categoriesAdding",
     ],
 ];

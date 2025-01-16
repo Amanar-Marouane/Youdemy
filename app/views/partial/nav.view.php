@@ -39,7 +39,7 @@
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Admin"): ?>
                             <li>
-                                <a href="/dashboard/admin" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
+                                <a href="/dashboard/accounts" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
                             </li>
                         <?php endif; ?>
                     </ul>

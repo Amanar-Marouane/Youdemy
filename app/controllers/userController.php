@@ -67,11 +67,11 @@ class userController
         include __DIR__ . "/../views/profile.view.php";
     }
 
-    public function adminDashboardRendering()
+    public function accountsDashboardRendering()
     {
-        if ($info = Admin::adminDashboardRendering()) {
+        if ($info = Admin::accountsDashboardRendering()) {
             extract($info);
-            include __DIR__ . "/../views/adminDashboard.view.php";
+            include __DIR__ . "/../views/accManagement.php";
         }
     }
 
