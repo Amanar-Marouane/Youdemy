@@ -44,8 +44,21 @@ class courseController
         if ($action === "delete") {
             if (Course::courseRemove($course_id)) echo "The course has been removed successfully";
         } else {
-            $info = Course::courseEdit($course_id);
+            $info = Course::courseSession($course_id);
             include_once __DIR__ . "/../views/courseEditForm.view.php";
         }
+    }
+
+    public function courseUpdate()
+    {
+        // $title, $description, $type, $content, $category_id, $course_id, $tags
+
+        if (! Course::courseUpdate($_POST['course_title'], $_POST['course_desc'], $_POST["course_type"], $_POST['course_content'], $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
+            $_SESSION["error"] = "Something went wrong!";
+            header("Location: /teacher/courses");
+            exit();
+        }
+        $_SESSION["success"] = "Course has been updated successfuly!";
+        header("Location: /teacher/courses");
     }
 }

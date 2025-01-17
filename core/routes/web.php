@@ -86,5 +86,10 @@ return [
         "path" => "controllers/courseController.php",
         "class" => "courseController",
         "method" => "courseSession",
+    ],
+    "dashboard/courses/update" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "courseUpdate",
     ]
 ];

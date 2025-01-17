@@ -16,6 +16,7 @@
             </div>
 
             <form id="courseForm" class="p-6" action="/dashboard/courses/update" method="POST">
+                <input type="hidden" name="course_id" value="<?= $current_course_id ?>">
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Course Title</label>
@@ -94,3 +95,17 @@
 </div>
 
 <?php include __DIR__ . "/partial/footer.view.php" ?>
+
+<script>
+    $(document).ready(function() {
+        feather.replace();
+
+        $('#tagSearch').on('input', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            $('#tagsContainer div').each(function() {
+                const tagText = $(this).find('label').text().toLowerCase();
+                $(this).toggle(tagText.includes(searchTerm));
+            });
+        })
+    });
+</script>

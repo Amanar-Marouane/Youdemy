@@ -36,7 +36,7 @@ class Course
         return $instance->query($stmt, $bindParam);
     }
 
-    public static function courseEdit($course_id)
+    public static function courseSession($course_id)
     {
         $info = [];
         $instance = Db::getInstance();
@@ -55,5 +55,39 @@ class Course
         $info["course_info"] = $instance->fetch($course_info, $bindParam);
 
         return $info;
+    }
+
+    public static function courseUpdate($title, $description, $type, $content, $category_id, $course_id, $tags)
+    {
+        $instance = Db::getInstance();
+        $instance->transaction();
+
+        $updateMainInfo = "UPDATE courses
+                            set course_title = ?, course_desc = ?, course_type = ?, course_content = ?, category_id = ?
+                            WHERE course_id = ?";
+        $bindParams = [$title, $description, $type, $content, $category_id, $course_id];
+        if (! $instance->query($updateMainInfo, $bindParams)) {
+            $instance->rollback();
+            return false;
+        }
+
+        $removeOldTags = "DELETE FROM course_tags WHERE course_id = ?";
+        $bindParam = [$course_id];
+        if (! $instance->query($removeOldTags, $bindParam)) {
+            $instance->rollback();
+            return false;
+        }
+
+        foreach ($tags as $tag) {
+            $insertNewTags = "INSERT INTO course_tags (course_id, tag_id) VALUES (?, ?)";
+            $bindParams = [$course_id, $tag];
+            if (! $instance->query($insertNewTags, $bindParams)) {
+                $instance->rollback();
+                return false;
+            }
+        }
+
+        $instance->commit();
+        return true;
     }
 }
