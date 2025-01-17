@@ -8,7 +8,7 @@ class categoryController
     {
         if ($info = Category::categoriesDashboardRendering()) {
             extract($info);
-            include __DIR__ . "/../views/categoriesManagement.php";
+            include __DIR__ . "/../views/categoriesManagement.view.php";
         }
     }
 
@@ -17,7 +17,7 @@ class categoryController
         $data = json_decode($json, true);
 
         $category_id = $data['content'];
-        category::categoriesDeletion($category_id);
+        Category::categoriesDeletion($category_id);
     }
 
     public function categoriesAdding(){
@@ -25,6 +25,6 @@ class categoryController
         $data = json_decode($json, true);
 
         $category = $data['content'];
-        category::categoriesAdding($category);
+        Category::categoriesAdding($category);
     }
 }

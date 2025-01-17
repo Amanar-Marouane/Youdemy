@@ -57,4 +57,19 @@ return [
         "class" => "categoryController",
         "method" => "categoriesAdding",
     ],
+    "dashboard/tags" => [
+        "path" => "controllers/tagController.php",
+        "class" => "tagController",
+        "method" => "tagsDashboardRendering",
+    ],
+    "dashboard/tags/delete" => [
+        "path" => "controllers/tagController.php",
+        "class" => "tagController",
+        "method" => "tagDeletion",
+    ],
+    "dashboard/tags/add" => [
+        "path" => "controllers/tagController.php",
+        "class" => "tagController",
+        "method" => "tagAdding",
+    ],
 ];

@@ -18,13 +18,13 @@ class category
         return $info;
     }
 
-    public static function categoriesDeletion($user_id)
+    public static function categoriesDeletion($category_id)
     {
 
         $instance = Db::getInstance();
 
         $delete = "DELETE FROM categories WHERE category_id = ?;";
-        $bindParam = [$user_id];
+        $bindParam = [$category_id];
         return $instance->query($delete, $bindParam);
     }
 

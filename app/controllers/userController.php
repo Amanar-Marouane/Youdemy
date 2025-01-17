@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../models/User.php";
 require_once __DIR__ . "/../models/Admin.php";
-require_once __DIR__ . "/../../core/Functions.php";
 
 class userController
 {
@@ -71,7 +70,7 @@ class userController
     {
         if ($info = Admin::accountsDashboardRendering()) {
             extract($info);
-            include __DIR__ . "/../views/accManagement.php";
+            include __DIR__ . "/../views/accManagement.view.php";
         }
     }
 
