@@ -16,8 +16,15 @@ class courseController
 
     public function courseAdd()
     {
-        if (!CourseVideo::courseAdd($_POST['course_title'], $_POST['course_desc'], $_POST['course_type'], $_POST['course_content'], $_POST['category_id'], $_POST['tags'], $_POST['author_id'])) {
-            $_SESSION["error"] = "Something Went wrong";
+        $course_type = $_POST['course_type'];
+        if ($course_type === "Video") {
+            if (!CourseVideo::courseAdd($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST['category_id'], $_POST['tags'])) {
+                $_SESSION["error"] = "Something Went wrong";
+            }
+        } else {
+            if (!CourseDoc::courseAdd($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST['category_id'], $_POST['tags'])) {
+                $_SESSION["error"] = "Something Went wrong";
+            }
         }
         header("Location: /teacher/courses");
     }

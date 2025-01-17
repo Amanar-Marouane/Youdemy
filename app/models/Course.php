@@ -9,19 +9,22 @@ class Course
         $info = [];
         $instance = Db::getInstance();
 
+        $teacher_id = $_SESSION['user_id'];
+
         $tags = "SELECT * FROM tags";
         $info["tags"] = $instance->fetchAll($tags);
 
         $categories = "SELECT * FROM categories";
         $info["categories"] = $instance->fetchAll($categories);
 
-        $courses = "SELECT courses.course_id, courses.course_title, courses.course_desc, courses.course_type, courses.created_at, categories.category FROM courses JOIN categories ON categories.category_id = courses.category_id";
-        $info["courses"] = $instance->fetchAll($courses);
+        $courses = "SELECT courses.course_id, courses.course_title, courses.course_desc, courses.course_type, courses.created_at, categories.category FROM courses JOIN categories ON categories.category_id = courses.category_id WHERE author_id = ?";
+        $bindParam = [$teacher_id];
+        $info["courses"] = $instance->fetchAll($courses, $bindParam);
 
         return $info;
     }
 
-    public static function courseAdd($title, $descreption, $type, $url, $category, $tags, $author_id) {}
+    public static function courseAdd($title, $descreption, $url, $category_id, $tags) {}
 
     public static function courseRemove($course_id)
     {

@@ -5,13 +5,14 @@ require_once __DIR__ . "/Course.php";
 class CourseVideo extends Course
 {
 
-    public static function courseAdd($title, $descreption, $type, $url, $category_id, $tags, $author_id)
+    public static function courseAdd($title, $descreption, $url, $category_id, $tags)
     {
         $instence = Db::getInstance();
+        $author_id = $_SESSION['user_id'];
 
         $stmt = "INSERT INTO courses(author_id, course_title, course_desc, course_type, course_content, category_id)
-                    VALUES (?, ?, ?, ?, ?, ?)";
-        $bindParams = [$author_id, $title, $descreption, $type, $url, $category_id];
+                    VALUES (?, ?, ?, 'Video', ?, ?)";
+        $bindParams = [$author_id, $title, $descreption, $url, $category_id];
 
         $instence->transaction();
 
