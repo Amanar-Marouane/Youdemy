@@ -135,7 +135,26 @@
             const route = $(document.activeElement).closest('form').attr("action");
 
             ajaxRequest(action, course_id, target_element, route);
-        })
+        });
+
+        $('#courseType').on('change', function() {
+            if ($('#courseType').val() === 'Document') {
+                $('#courseContentFile').show();
+                $('#courseContentUrl').hide();
+            } else if ($('#courseType').val() === 'Video') {
+                $('#courseContentUrl').show();
+                $('#courseContentFile').hide();
+            }
+        });
+
+        if ($('#courseType').val() === 'Document') {
+            $('#courseContentFile').show();
+            $('#courseContentUrl').hide();
+        } else if ($('#courseType').val() === 'Video') {
+            $('#courseContentUrl').show();
+            $('#courseContentFile').hide();
+        }
+
     });
 </script>
 
@@ -150,7 +169,7 @@
             </button>
         </div>
 
-        <form id="courseForm" class="p-6" action="/teacher/courses/add" method="POST">
+        <form id="courseForm" class="p-6" action="/teacher/courses/add" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="author_id" value="14">
             <div class="space-y-6">
                 <div>
@@ -177,8 +196,10 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Content URL</label>
-                    <input type="url" id="courseContent" name="course_content" required
+                    <input type="url" id="courseContentUrl" name="course_content"
                         class="w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="file" id="courseContentFile" name="course_content" accept=".pdf,video/*"
+                        class="hidden block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-600 file:text-white file:cursor-pointer hover:file:bg-indigo-700 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
 
                 <div>

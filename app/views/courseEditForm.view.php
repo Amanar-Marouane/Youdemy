@@ -15,7 +15,7 @@
                 </button>
             </div>
 
-            <form id="courseForm" class="p-6" action="/dashboard/courses/update" method="POST">
+            <form id="courseForm" class="p-6" action="/dashboard/courses/update" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="course_id" value="<?= $current_course_id ?>">
                 <div class="space-y-6">
                     <div>
@@ -107,5 +107,50 @@
                 $(this).toggle(tagText.includes(searchTerm));
             });
         })
+
+        feather.replace();
+
+        $('#tagSearch').on('input', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            $('#tagsContainer div').each(function() {
+                const tagText = $(this).find('label').text().toLowerCase();
+                $(this).toggle(tagText.includes(searchTerm));
+            });
+        });
+
+        const urlInput = `
+            <input value="<?= $current_course_content ?>" type="url" id="courseContent" name="course_content" required
+                class="w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+        `;
+
+        const fileInput = `
+            <input type="file" id="courseContent" name="course_content" accept=".pdf,video/*" required
+                class="block w-full text-sm text-gray-300
+                       file:mr-4 file:py-2 file:px-4
+                       file:rounded-lg file:border-0
+                       file:text-sm file:font-medium
+                       file:bg-indigo-600 file:text-white
+                       file:cursor-pointer
+                       hover:file:bg-indigo-700
+                       bg-gray-700 rounded-lg
+                       border border-gray-600
+                       focus:outline-none focus:ring-2 
+                       focus:ring-indigo-500 focus:border-indigo-500">
+        `;
+
+        $('#courseType').on('change', function() {
+            const contentWrapper = $('#courseContent').parent();
+            if ($(this).val() === 'Video') {
+                $('#courseContent').replaceWith(urlInput);
+            } else if ($(this).val() === 'Document') {
+                $('#courseContent').replaceWith(fileInput);
+            }
+        });
+        let contentWrapper = $('#courseContent').parent();
+        if ($('#courseType').val() === 'Video') {
+            $('#courseContent').replaceWith(urlInput);
+        } else if ($('#courseType').val() === 'Document') {
+            $('#courseContent').replaceWith(fileInput);
+        }
     });
 </script>

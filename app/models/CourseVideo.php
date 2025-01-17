@@ -33,4 +33,38 @@ class CourseVideo extends Course
         $instence->commit();
         return true;
     }
+
+    public static function courseUpdate($title, $description, $content, $category_id, $course_id, $tags)
+    {
+        $instance = Db::getInstance();
+        $instance->transaction();
+
+        $updateMainInfo = "UPDATE courses
+                            set course_title = ?, course_desc = ?, course_type = 'Video', course_content = ?, category_id = ?
+                            WHERE course_id = ?";
+        $bindParams = [$title, $description, $content, $category_id, $course_id];
+        if (! $instance->query($updateMainInfo, $bindParams)) {
+            $instance->rollback();
+            return false;
+        }
+
+        $removeOldTags = "DELETE FROM course_tags WHERE course_id = ?";
+        $bindParam = [$course_id];
+        if (! $instance->query($removeOldTags, $bindParam)) {
+            $instance->rollback();
+            return false;
+        }
+
+        foreach ($tags as $tag) {
+            $insertNewTags = "INSERT INTO course_tags (course_id, tag_id) VALUES (?, ?)";
+            $bindParams = [$course_id, $tag];
+            if (! $instance->query($insertNewTags, $bindParams)) {
+                $instance->rollback();
+                return false;
+            }
+        }
+
+        $instance->commit();
+        return true;
+    }
 }

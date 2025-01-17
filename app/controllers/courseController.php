@@ -22,8 +22,18 @@ class courseController
                 $_SESSION["error"] = "Something Went wrong";
             }
         } else {
-            if (!CourseDoc::courseAdd($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST['category_id'], $_POST['tags'])) {
-                $_SESSION["error"] = "Something Went wrong";
+            $target_dir = __DIR__ . "/../../public/assets";
+            if (isset($_FILES['course_content']) && $_FILES['course_content']['error'] === UPLOAD_ERR_OK) {
+                $file_extension = strtolower(pathinfo($_FILES['course_content']['name'], PATHINFO_EXTENSION));
+                $unique_file_name = uniqid() . '.' . $file_extension;
+                $filePath = $target_dir . '/' . $unique_file_name;
+                if (!move_uploaded_file($_FILES['course_content']['tmp_name'], $filePath)) {
+                    $_SESSION["error"] = "Failed to upload the file";
+                } else {
+                    if (!CourseDoc::courseAdd($_POST['course_title'], $_POST['course_desc'], $filePath, $_POST['category_id'], $_POST['tags'])) {
+                        $_SESSION["error"] = "Something Went wrong";
+                    }
+                }
             }
         }
         header("Location: /teacher/courses");
@@ -51,12 +61,32 @@ class courseController
 
     public function courseUpdate()
     {
-        // $title, $description, $type, $content, $category_id, $course_id, $tags
+        $course_type = $_POST['course_type'];
 
-        if (! Course::courseUpdate($_POST['course_title'], $_POST['course_desc'], $_POST["course_type"], $_POST['course_content'], $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
-            $_SESSION["error"] = "Something went wrong!";
-            header("Location: /teacher/courses");
-            exit();
+        if ($course_type === "Video") {
+            if (!CourseVideo::courseUpdate($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
+                $_SESSION["error"] = "Something Went wrong";
+                header("Location: /teacher/courses");
+                exit();
+            }
+        } else {
+            $target_dir = __DIR__ . "/../../public/assets";
+            if (isset($_FILES['course_content']) && $_FILES['course_content']['error'] === UPLOAD_ERR_OK) {
+                $file_extension = strtolower(pathinfo($_FILES['course_content']['name'], PATHINFO_EXTENSION));
+                $unique_file_name = uniqid() . '.' . $file_extension;
+                $filePath = $target_dir . '/' . $unique_file_name;
+                if (!move_uploaded_file($_FILES['course_content']['tmp_name'], $filePath)) {
+                    $_SESSION["error"] = "Failed to upload the file";
+                    header("Location: /teacher/courses");
+                    exit();
+                } else {
+                    if (!CourseDoc::courseUpdate($_POST['course_title'], $_POST['course_desc'], $filePath, $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
+                        $_SESSION["error"] = "Something Went wrong";
+                        header("Location: /teacher/courses");
+                        exit();
+                    }
+                }
+            }
         }
         $_SESSION["success"] = "Course has been updated successfuly!";
         header("Location: /teacher/courses");
