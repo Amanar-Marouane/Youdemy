@@ -50,9 +50,9 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left"><?= $created_at ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                 <div class="flex gap-3">
-                                    <form action="/dashboard/courses/delete" class="removeForm">
+                                    <form action="/dashboard/courses/session" class="removeForm" method="POST">
                                         <input type="hidden" name="course_id" id="course_id" value="<?= $course_id ?>">
-                                        <button class="text-gray-400 hover:text-indigo-400 transition-colors">
+                                        <button type="submit" name="action" value="edit" class="text-gray-400 hover:text-indigo-400 transition-colors">
                                             <i data-feather="edit-2" class="w-5 h-5"></i>
                                         </button>
                                         <button type="submit" value="delete" class="text-gray-400 hover:text-red-400 transition-colors">
@@ -126,9 +126,10 @@
         }
 
         $(".removeForm").on('submit', function(e) {
-            e.preventDefault();
-
-            const action = $(document.activeElement).val();            
+            const action = $(document.activeElement).val();
+            if (action === "delete") {
+                e.preventDefault();
+            }
             const course_id = $(document.activeElement).closest('form').find('#course_id').val();
             const target_element = $(document.activeElement).closest('tr');
             const route = $(document.activeElement).closest('form').attr("action");

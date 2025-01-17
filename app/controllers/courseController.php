@@ -22,12 +22,23 @@ class courseController
         header("Location: /teacher/courses");
     }
 
-    public function courseRemove()
+    public function courseSession()
     {
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
-        $course_id = $data['course_id'];
+        if (isset($data["action"])) {
+            $action = $data["action"];
+            $course_id = $data['course_id'];
+        } else {
+            $action = $_POST["action"];
+            $course_id = $_POST['course_id'];
+        }
 
-        if (Course::courseRemove($course_id)) echo "The course has been removed successfully";
+        if ($action === "delete") {
+            if (Course::courseRemove($course_id)) echo "The course has been removed successfully";
+        } else {
+            $info = Course::courseEdit($course_id);
+            include_once __DIR__ . "/../views/courseEditForm.view.php";
+        }
     }
 }

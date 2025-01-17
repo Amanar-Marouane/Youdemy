@@ -32,4 +32,25 @@ class Course
 
         return $instance->query($stmt, $bindParam);
     }
+
+    public static function courseEdit($course_id)
+    {
+        $info = [];
+        $instance = Db::getInstance();
+        $bindParam = [$course_id];
+
+        $course_tags = "SELECT tag_id FROM course_tags WHERE course_id = ?";
+        $info["course_tags"] = $instance->fetchAll($course_tags, $bindParam);
+
+        $tags = "SELECT * FROM tags";
+        $info["tags"] = $instance->fetchAll($tags);
+
+        $categories = "SELECT * FROM categories";
+        $info["categories"] = $instance->fetchAll($categories);
+
+        $course_info = "SELECT courses.*, categories.category AS category FROM courses LEFT JOIN categories ON categories.category_id = courses.category_id WHERE courses.course_id = ?";
+        $info["course_info"] = $instance->fetch($course_info, $bindParam);
+
+        return $info;
+    }
 }
