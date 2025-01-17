@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../models/User.php";
 require_once __DIR__ . "/../models/Admin.php";
+require_once __DIR__ . "/../models/Teacher.php";
 
 class userController
 {
@@ -95,7 +96,7 @@ class userController
         if ($action === "activate") Admin::accountActivation($user_id);
         else Admin::accountDeletion($user_id);
     }
-    
+
     public function accountSuspension()
     {
         $json = file_get_contents('php://input');

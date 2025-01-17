@@ -42,4 +42,19 @@ class Db
     {
         return $this->pdo->lastInsertId();
     }
+
+    public function transaction()
+    {
+        return $this->pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->pdo->commit();
+    }
+
+    public function rollback()
+    {
+        return $this->pdo->rollBack();
+    }
 }

@@ -72,4 +72,14 @@ return [
         "class" => "tagController",
         "method" => "tagAdding",
     ],
+    "teacher/courses" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "coursesDashboardRenderingT",
+    ],
+    "teacher/courses/add" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "courseAdd",
+    ],
 ];
