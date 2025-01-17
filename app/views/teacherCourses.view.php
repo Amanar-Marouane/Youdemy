@@ -50,12 +50,15 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left"><?= $created_at ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                 <div class="flex gap-3">
-                                    <button class="text-gray-400 hover:text-indigo-400 transition-colors">
-                                        <i data-feather="edit-2" class="w-5 h-5"></i>
-                                    </button>
-                                    <button class="text-gray-400 hover:text-red-400 transition-colors">
-                                        <i data-feather="trash-2" class="w-5 h-5"></i>
-                                    </button>
+                                    <form action="/dashboard/courses/delete" class="removeForm">
+                                        <input type="hidden" name="course_id" id="course_id" value="<?= $course_id ?>">
+                                        <button class="text-gray-400 hover:text-indigo-400 transition-colors">
+                                            <i data-feather="edit-2" class="w-5 h-5"></i>
+                                        </button>
+                                        <button type="submit" value="delete" class="text-gray-400 hover:text-red-400 transition-colors">
+                                            <i data-feather="trash-2" class="w-5 h-5"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -101,6 +104,36 @@
                 const tagText = $(this).find('label').text().toLowerCase();
                 $(this).toggle(tagText.includes(searchTerm));
             });
+        })
+
+        function ajaxRequest(action, course_id, target_element, route) {
+            $.ajax({
+                url: route,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    action: action,
+                    course_id: course_id,
+                }),
+                success: function(Response) {
+                    target_element.remove();
+                    $('.success-p').html(Response);
+                },
+                error: function() {
+                    $('.error-p').html("Something went wrong, Try again");
+                }
+            })
+        }
+
+        $(".removeForm").on('submit', function(e) {
+            e.preventDefault();
+
+            const action = $(document.activeElement).val();            
+            const course_id = $(document.activeElement).closest('form').find('#course_id').val();
+            const target_element = $(document.activeElement).closest('tr');
+            const route = $(document.activeElement).closest('form').attr("action");
+
+            ajaxRequest(action, course_id, target_element, route);
         })
     });
 </script>

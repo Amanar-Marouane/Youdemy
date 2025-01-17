@@ -21,7 +21,15 @@ class Course
         return $info;
     }
 
-    public static function courseAdd($title, $descreption, $type, $url, $category, $tags, $author_id){
+    public static function courseAdd($title, $descreption, $type, $url, $category, $tags, $author_id) {}
 
+    public static function courseRemove($course_id)
+    {
+        $instance = Db::getInstance();
+
+        $stmt = "DELETE FROM courses WHERE course_id = ?";
+        $bindParam = [$course_id];
+
+        return $instance->query($stmt, $bindParam);
     }
 }

@@ -82,4 +82,9 @@ return [
         "class" => "courseController",
         "method" => "courseAdd",
     ],
+    "dashboard/courses/delete" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "courseRemove",
+    ],
 ];

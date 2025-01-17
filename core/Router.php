@@ -11,6 +11,9 @@ class Router
         if (!isset($_SESSION['error'])) {
             $_SESSION['error'] = "";
         }
+        if (!isset($_SESSION['success'])) {
+            $_SESSION['success'] = "";
+        }
 
         if (key_exists($uri, $routes)) {
             if (is_array($routes[$uri])) {
