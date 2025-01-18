@@ -77,10 +77,7 @@ class Course
         $stmt = "SELECT COUNT(course_id) as total_courses FROM courses";
         $total_course = $instance->fetch($stmt);
         $info["total_pages"] = ceil ((int) $total_course["total_courses"] / $limit);
-
         
-        // dd($info["total_pages"]);
-
         return $info;
     }
 }

@@ -21,30 +21,30 @@
                 <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
                         <li>
-                            <a href="/home" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Home</a>
+                            <a href="/home" class="<?php if ("home" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Home</a>
                         </li>
                         <li>
-                            <a href="/courses" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Courses</a>
+                            <a href="/courses" class="<?php if ("courses" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Courses</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Categories</a>
+                            <a href="#" class="<?php if ("#" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Categories</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Teachers</a>
+                            <a href="#" class="<?php if ("#" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Teachers</a>
                         </li>
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <li>
-                                <a href="/profile" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
+                                <a href="/profile" class="<?php if ("profile" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Profile</a>
                             </li>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Admin"): ?>
                             <li>
-                                <a href="/dashboard/accounts" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
+                                <a href="/dashboard/accounts" class="<?php if ("dashboard/accounts" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
                             </li>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Teacher"): ?>
                             <li>
-                                <a href="/teacher/courses" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
+                                <a href="/teacher/courses" class="<?php if ("teacher/courses" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
                             </li>
                         <?php endif; ?>
                     </ul>

@@ -51,7 +51,7 @@
                 <?php endif; ?>
 
                 <?php for ($i = $index, $max = 0; $i <= $total_pages && $max < 5; $i++, $max++): ?>
-                    <a href="/courses?<?= $i ?>" class="px-4 py-2 rounded-lg bg-indigo-600 text-white"><?= $i ?></a>
+                    <a href="/courses?<?= $i ?>" class="px-4 py-2 rounded-lg  <?= $index === $i ? "bg-indigo-900" : "bg-indigo-600" ?> text-white"><?= $i ?></a>
                 <?php endfor; ?>
 
                 <?php if ($index != $total_pages): ?>
