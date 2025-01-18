@@ -78,13 +78,14 @@ class courseController
                     $_SESSION["error"] = "Failed to upload the file";
                     header("Location: /teacher/courses");
                     exit();
-                } else {
-                    if (!CourseDoc::courseUpdate($_POST['course_title'], $_POST['course_desc'], $filePath, $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
-                        $_SESSION["error"] = "Something Went wrong";
-                        header("Location: /teacher/courses");
-                        exit();
-                    }
                 }
+            }else {
+                $filePath = null;
+            }
+            if (!CourseDoc::courseUpdate($_POST['course_title'], $_POST['course_desc'], $filePath, $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
+                $_SESSION["error"] = "Something Went wrong";
+                header("Location: /teacher/courses");
+                exit();
             }
         }
         $_SESSION["success"] = "Course has been updated successfuly!";

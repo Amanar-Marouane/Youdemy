@@ -53,8 +53,10 @@
         </nav>
         <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center error-p">
             <?= $_SESSION['error']; ?>
+            <?php unset($_SESSION['error']); ?>
         </p>
         <p class="bg-green-900 text-green-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center success-p">
             <?= $_SESSION['success']; ?>
+            <?php unset($_SESSION['success']); ?>
         </p>
     </header>

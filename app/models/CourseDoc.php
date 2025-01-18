@@ -40,9 +40,9 @@ class CourseDoc extends Course
         $instance->transaction();
 
         $updateMainInfo = "UPDATE courses
-                            set course_title = ?, course_desc = ?, course_type = 'Document', course_content = ?, category_id = ?
+                            set course_title = ?, course_desc = ?, course_type = 'Document', course_content = CASE WHEN ? IS NULL THEN course_content ELSE ? END, category_id = ?
                             WHERE course_id = ?";
-        $bindParams = [$title, $description, $content, $category_id, $course_id];
+        $bindParams = [$title, $description, $content, $content, $category_id, $course_id];
         if (! $instance->query($updateMainInfo, $bindParams)) {
             $instance->rollback();
             return false;
