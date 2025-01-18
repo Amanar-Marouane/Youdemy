@@ -67,4 +67,24 @@ class CourseDoc extends Course
         $instance->commit();
         return true;
     }
+
+    public static function courseDetails($course_id)
+    {
+        $instance = Db::getInstance();
+        $info = [];
+        $bindParam = [$course_id];
+
+        $stmt = "SELECT courses.*, categories.category, users.full_name FROM courses
+                JOIN categories ON categories.category_id = courses.category_id
+                JOIN users ON users.user_id = courses.author_id
+                WHERE course_id = ?";
+        $info["courseInfo"] = $instance->fetch($stmt, $bindParam);
+
+        $stmt = "SELECT tags.* FROM course_tags
+                JOIN tags ON tags.tag_id = course_tags.tag_id
+                WHERE course_tags.course_id = ?";
+        $info["tags"] = $instance->fetchAll($stmt, $bindParam);
+
+        return $info;
+    }
 }

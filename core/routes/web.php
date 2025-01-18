@@ -91,5 +91,10 @@ return [
         "path" => "controllers/courseController.php",
         "class" => "courseController",
         "method" => "courseUpdate",
-    ]
+    ],
+    "course/details" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "courseDetails",
+    ],
 ];

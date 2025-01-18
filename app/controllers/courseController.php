@@ -62,7 +62,6 @@ class courseController
     public function courseUpdate()
     {
         $course_type = $_POST['course_type'];
-
         if ($course_type === "Video") {
             if (!CourseVideo::courseUpdate($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
                 $_SESSION["error"] = "Something Went wrong";
@@ -90,5 +89,19 @@ class courseController
         }
         $_SESSION["success"] = "Course has been updated successfuly!";
         header("Location: /teacher/courses");
+    }
+
+    public function courseDetails()
+    {
+        $course_id = $_POST['course_id'];
+        $course_type = $_POST['course_type'];
+
+        if ($course_type === "Video") {
+            $info = CourseVideo::courseDetails($course_id);
+        } else {
+            $info = CourseDoc::courseDetails($course_id);
+        }
+        extract($info);
+        include __DIR__ . "/../views/courseDetails.view.php";
     }
 }

@@ -56,4 +56,8 @@ class Course
 
         return $info;
     }
+
+    public static function courseUpdate($title, $description, $content, $category_id, $course_id, $tags) {}
+
+    public static function courseDetails($course_id) {}
 }

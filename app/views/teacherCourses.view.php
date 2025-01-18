@@ -41,7 +41,13 @@
                     <?php foreach ($courses as $course):
                         extract($course) ?>
                         <tr class="search-row hover:bg-gray-700 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left"><?= $course_title ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left">
+                                <form action="/course/details" method="POST">
+                                    <input type="hidden" name="course_id" value="<?= $course_id ?>">
+                                    <input type="hidden" name="course_type" value="<?= $course_type ?>">
+                                    <button type="submit"><?= $course_title ?></button>
+                                </form>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-left">
                                 <span class="px-2 py-1 text-xs font-medium rounded-full text-green-300 bg-green-900 <?php if ($course_type === "Video"): ?> bg-yellow-900 text-yellow-300 <?php endif; ?>"><?= $course_type ?></span>
                             </td>
