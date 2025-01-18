@@ -79,7 +79,7 @@ class courseController
                     header("Location: /teacher/courses");
                     exit();
                 }
-            }else {
+            } else {
                 $filePath = null;
             }
             if (!CourseDoc::courseUpdate($_POST['course_title'], $_POST['course_desc'], $filePath, $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
@@ -104,5 +104,18 @@ class courseController
         }
         extract($info);
         include __DIR__ . "/../views/courseDetails.view.php";
+    }
+
+    public function getAllCourses()
+    {
+        $index = getCurrentPageIndex();
+        $info = Course::getAllCourses($index);
+        extract($info);
+        if ($index < 1 || $index > $total_pages) {
+            header("Location: /home");
+            exit();
+        }
+
+        include __DIR__ . "/../views/courses.view.php";
     }
 }

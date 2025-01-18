@@ -60,4 +60,27 @@ class Course
     public static function courseUpdate($title, $description, $content, $category_id, $course_id, $tags) {}
 
     public static function courseDetails($course_id) {}
+
+    public static function getAllCourses($index)
+    {
+        $info = [];
+        $instance = Db::getInstance();
+        $limit = 6;
+        $offset = $limit * ($index - 1);
+        $bindParams = [$limit, $offset];
+
+        $stmt = "SELECT courses.*, users.full_name FROM courses
+                JOIN users ON users.user_id = courses.author_id
+                ORDER BY created_at LIMIT ? OFFSET ?";
+        $info["courses"] = $instance->fetchAll($stmt, $bindParams);
+
+        $stmt = "SELECT COUNT(course_id) as total_courses FROM courses";
+        $total_course = $instance->fetch($stmt);
+        $info["total_pages"] = ceil ((int) $total_course["total_courses"] / $limit);
+
+        
+        // dd($info["total_pages"]);
+
+        return $info;
+    }
 }

@@ -73,7 +73,8 @@
                                 <?php foreach ($tags as $tag):
                                     extract($tag); ?>
                                     <div class="flex items-center">
-                                        <input type="checkbox" <?php if (in_array($tag_id, array_column($course_tags, "tag_id"))): ?> checked <?php endif; ?> id="<?= $tag_id ?>" name="tags[]" value="<?= $tag_id ?>"
+                                        <input type="checkbox" <?= in_array($tag_id, array_column($course_tags, "tag_id")) ? "checked" : "" ?>
+                                            id="<?= $tag_id ?>" name="tags[]" value="<?= $tag_id ?>"
                                             class="h-4 w-4 rounded border-gray-500 text-indigo-600 focus:ring-indigo-500 bg-gray-600">
                                         <label for="<?= $tag_id ?>" class="ml-2 text-sm text-gray-300 cursor-pointer"><?= $tag_content ?></label>
                                     </div>

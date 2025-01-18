@@ -97,4 +97,9 @@ return [
         "class" => "courseController",
         "method" => "courseDetails",
     ],
+    "courses" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "getAllCourses",
+    ]
 ];

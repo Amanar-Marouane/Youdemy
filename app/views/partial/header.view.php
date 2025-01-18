@@ -30,3 +30,9 @@
         }
     </style>
 </head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        feather.replace();
+    });
+</script>
