@@ -21,7 +21,7 @@
             </div>
             <div class="bg-gray-800 rounded-lg p-6">
                 <h2 class="text-lg font-semibold text-white mb-4">Add New Category</h2>
-                <form class="space-y-4 addingForm" action="/dashboard/categories/add">
+                <form class="space-y-4 addingForm" action="/dashboard/categories/add" method="POST">
                     <div>
                         <label for="category_name" class="block text-sm font-medium text-gray-300">Category Name</label>
                         <div class="mt-1 flex gap-4">
@@ -85,7 +85,7 @@
                 content: content,
             }),
             success: function(Response) {
-                if(target_element) target_element.remove();
+                if (target_element) target_element.remove();
                 $(".error-p").html(Response);
             },
             error: function() {
@@ -103,18 +103,6 @@
             const route = $(document.activeElement).closest('form').attr("action");
 
             ajaxRequest(user_id, target_element, route);
-        })
-    });
-
-    $(document).ready(function() {
-        $(".addingForm").on('submit', function(e) {
-            e.preventDefault();
-
-            const category_name = $(document.activeElement).closest('form').find('#category_name').val();
-            $(".addingForm input").val('');
-            const route = $(document.activeElement).closest('form').attr("action");
-
-            ajaxRequest(category_name, false, route);
         })
     });
 </script>

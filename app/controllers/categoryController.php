@@ -21,10 +21,9 @@ class categoryController
     }
 
     public function categoriesAdding(){
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-
-        $category = $data['content'];
-        Category::categoriesAdding($category);
+        $category = $_POST['category_name'];
+        if (Category::categoriesAdding($category)) $_SESSION["success"] = "Category has been added succesfuly";
+        else $_SESSION["error"] = "Category has not been added succesfuly or it's already exist";
+        header("Location: /dashboard/categories");
     }
 }

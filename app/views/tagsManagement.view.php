@@ -21,7 +21,7 @@
             </div>
             <div class="bg-gray-800 rounded-lg p-6">
                 <h2 class="text-lg font-semibold text-white mb-4">Add New Tags</h2>
-                <form class="space-y-4 addingForm" action="/dashboard/tags/add">
+                <form class="space-y-4 addingForm" action="/dashboard/tags/add" method="POST">
                     <div>
                         <label for="tag_content" class="block text-sm font-medium text-gray-300">Add Tag(s)</label>
                         <div class="mt-1 flex gap-4">
@@ -102,18 +102,6 @@
             const route = $(document.activeElement).closest('form').attr("action");
 
             ajaxRequest(user_id, target_element, route);
-        })
-    });
-
-    $(document).ready(function() {
-        $(".addingForm").on('submit', function(e) {
-            e.preventDefault();
-
-            const tags = $(document.activeElement).closest('form').find('#tag_content').val();
-            $(".addingForm textarea").val('');
-            const route = $(document.activeElement).closest('form').attr("action");
-
-            ajaxRequest(tags, false, route);
         })
     });
 </script>

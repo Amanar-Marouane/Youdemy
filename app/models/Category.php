@@ -40,6 +40,6 @@ class category
             $bindParam = [$category];
             return $instance->query($insert, $bindParam);
         }
-        echo "Category already exist!";
+        return false;
     }
 }

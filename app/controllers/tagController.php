@@ -21,10 +21,9 @@ class tagController
     }
 
     public function tagAdding(){
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-
-        $tags = $data['content'];
+        $tags = $_POST['tag_content'];
         Tag::tagAdding($tags);
+
+        header("Location: /dashboard/tags");
     }
 }
