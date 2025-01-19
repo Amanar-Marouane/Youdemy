@@ -43,7 +43,7 @@ class Course
 
         $bindParams = [$teacher_id, $teacher_id];
         $stmt = "SELECT COUNT(course_id) AS total_courses,
-                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) <= 1 AND author_id = ?) AS recent_courses
+                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) >= 1 AND author_id = ?) AS recent_courses
                 FROM courses WHERE author_id = ?";
         $info["courses_statics"] = $instance->fetch($stmt, $bindParams);
 
@@ -51,7 +51,7 @@ class Course
                 (SELECT COUNT(my_courses.enroll_id)
                  FROM my_courses
                  JOIN courses ON courses.course_id = my_courses.course_id
-                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) <= 1 
+                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) >= 1 
                  AND courses.author_id = ?) AS recent_enrollments
                 FROM my_courses
                 JOIN courses ON courses.course_id = my_courses.course_id
@@ -124,19 +124,13 @@ class Course
         return $info;
     }
 
-    public static function coursesAnalyticsDashboardA()
+    public static function adminAnalyticsDashboard()
     {
         $info = [];
         $instance = Db::getInstance();
 
-        $courses = "SELECT courses.course_id, courses.course_title, courses.course_type, courses.created_at, categories.category , 
-                    (SELECT COUNT(my_courses.enroll_id) FROM my_courses WHERE my_courses.course_id = courses.course_id) AS total_enrollment
-                    FROM courses 
-                    JOIN categories ON categories.category_id = courses.category_id";
-        $info["courses"] = $instance->fetchAll($courses);
-
         $stmt = "SELECT COUNT(course_id) AS total_courses,
-                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) <= 1) AS recent_courses
+                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) >= 1) AS recent_courses
                 FROM courses";
         $info["courses_statics"] = $instance->fetch($stmt);
 
@@ -144,11 +138,24 @@ class Course
                 (SELECT COUNT(my_courses.enroll_id)
                  FROM my_courses
                  JOIN courses ON courses.course_id = my_courses.course_id
-                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) <= 1) AS recent_enrollments
+                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) >= 1) AS recent_enrollments
                 FROM my_courses
                 JOIN courses ON courses.course_id = my_courses.course_id";
-
         $info["students_statics"] = $instance->fetch($stmt);
+
+        $stmt = "SELECT users.user_id AS author_id, users.full_name, users.profile_img,
+                        (SELECT COUNT(course_id) 
+                        FROM courses 
+                        WHERE courses.author_id = users.user_id) AS total_courses,
+                        (SELECT COUNT(my_courses.enroll_id) 
+                        FROM my_courses 
+                        JOIN courses ON my_courses.course_id = courses.course_id 
+                        WHERE courses.author_id = users.user_id) AS total_enrollments
+                FROM users
+                WHERE users.user_id IN (SELECT DISTINCT author_id FROM courses)
+                ORDER BY total_enrollments DESC, total_courses DESC
+                LIMIT 3";
+        $info["top_teachers"] = $instance->fetchAll($stmt);
 
         return $info;
     }

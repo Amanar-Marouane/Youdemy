@@ -129,7 +129,8 @@ class courseController
         include __DIR__ . "/../views/courses.view.php";
     }
 
-    public function coursesAnalyticsDashboardT(){
+    public function coursesAnalyticsDashboardT()
+    {
         $teacher_id = $_SESSION['user_id'];
         if ($info = Course::coursesAnalyticsDashboardT($teacher_id)) {
             extract($info);
@@ -139,10 +140,20 @@ class courseController
         }
     }
 
-    public function adminCoursesManage(){
+    public function adminCoursesManage()
+    {
         $info = Course::adminCoursesManage();
         extract($info);
         extract($overview);
         include __DIR__ . "/../views/adminCourses.view.php";
+    }
+
+    public function adminaAnalytics()
+    {
+        $info = Course::adminAnalyticsDashboard();
+        extract($info);
+        extract($courses_statics);
+        extract($students_statics);
+        include __DIR__ . "/../views/adminAnalytics.view.php";
     }
 }
