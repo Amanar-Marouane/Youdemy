@@ -26,4 +26,20 @@ class MyCourses
         }
         return true;
     }
+
+    public static function getAllCourses($user_id)
+    {
+        $info = [];
+        $instence = Db::getInstance();
+        $bindParam = [$user_id];
+
+        $stmt = "SELECT courses.*, users.full_name
+                 FROM my_courses
+                 JOIN courses ON courses.course_id = my_courses.course_id
+                 JOIN users ON users.user_id = courses.author_id
+                 WHERE my_courses.user_id = ?";
+        $info['courses'] = $instence->fetchAll($stmt, $bindParam);
+
+        return $info;
+    }
 }

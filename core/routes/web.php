@@ -112,4 +112,9 @@ return [
         "class" => "MyCoursesController",
         "method" => "unenroll",
     ],
+    "mycourses" => [
+        "path" => "controllers/myCoursesController.php",
+        "class" => "MyCoursesController",
+        "method" => "getAllCourses",
+    ],
 ];

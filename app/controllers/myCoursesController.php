@@ -31,4 +31,18 @@ class MyCoursesController
         }
         $_SESSION['success'] = "You have successfuly unenrolled from this course";
     }
+
+    public function getAllCourses()
+    {
+
+        $user_id = $_SESSION['user_id'];
+
+        if (!$info = MyCourses::getAllCourses($user_id)) {
+            $_SESSION['error'] = "Something went wrong! Try again";
+            header("Location: /home");
+            exit();
+        }
+        extract($info);
+        include __DIR__ . "/../views/studentCourses.view.php";
+    }
 }
