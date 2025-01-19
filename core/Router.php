@@ -28,7 +28,7 @@ class Router
                 include __DIR__ . "/../app/$routes[$uri]";
             }
         } else {
-            die("CHECK ROUTER => $uri");
+            include __DIR__ . "/../app/views/404.view.php";
         }
     }
 }
