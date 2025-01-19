@@ -17,9 +17,47 @@ class Course
         $categories = "SELECT * FROM categories";
         $info["categories"] = $instance->fetchAll($categories);
 
-        $courses = "SELECT courses.course_id, courses.course_title, courses.course_desc, courses.course_type, courses.created_at, categories.category FROM courses JOIN categories ON categories.category_id = courses.category_id WHERE author_id = ?";
+        $courses = "SELECT courses.course_id, courses.course_title, courses.course_desc, courses.course_type, courses.created_at, categories.category , 
+                    (SELECT COUNT(my_courses.enroll_id) FROM my_courses WHERE my_courses.course_id = courses.course_id) AS total_enrollment
+                    FROM courses 
+                    JOIN categories ON categories.category_id = courses.category_id 
+                    WHERE author_id = ?";
         $bindParam = [$teacher_id];
         $info["courses"] = $instance->fetchAll($courses, $bindParam);
+
+        return $info;
+    }
+
+    public static function coursesAnalyticsDashboardT($teacher_id)
+    {
+        $info = [];
+        $instance = Db::getInstance();
+
+        $courses = "SELECT courses.course_id, courses.course_title, courses.course_type, courses.created_at, categories.category , 
+                    (SELECT COUNT(my_courses.enroll_id) FROM my_courses WHERE my_courses.course_id = courses.course_id) AS total_enrollment
+                    FROM courses 
+                    JOIN categories ON categories.category_id = courses.category_id 
+                    WHERE author_id = ?";
+        $bindParam = [$teacher_id];
+        $info["courses"] = $instance->fetchAll($courses, $bindParam);
+
+        $bindParams = [$teacher_id, $teacher_id];
+        $stmt = "SELECT COUNT(course_id) AS total_courses,
+                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) <= 1 AND author_id = ?) AS recent_courses
+                FROM courses WHERE author_id = ?";
+        $info["courses_statics"] = $instance->fetch($stmt, $bindParams);
+
+        $stmt = "SELECT COUNT(my_courses.enroll_id) AS total_enrollments,
+                (SELECT COUNT(my_courses.enroll_id)
+                 FROM my_courses
+                 JOIN courses ON courses.course_id = my_courses.course_id
+                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) <= 1 
+                 AND courses.author_id = ?) AS recent_enrollments
+                FROM my_courses
+                JOIN courses ON courses.course_id = my_courses.course_id
+                WHERE courses.author_id = ?";
+
+        $info["students_statics"] = $instance->fetch($stmt, $bindParams);
 
         return $info;
     }

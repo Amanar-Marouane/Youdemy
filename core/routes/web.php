@@ -117,4 +117,9 @@ return [
         "class" => "MyCoursesController",
         "method" => "getAllCourses",
     ],
+    "teacher/analytics" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "coursesAnalyticsDashboardT",
+    ],
 ];

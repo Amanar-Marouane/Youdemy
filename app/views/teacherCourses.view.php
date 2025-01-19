@@ -31,7 +31,6 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Course Title</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Course Type</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Total Enrollements</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Caegory</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Created At</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
@@ -51,7 +50,6 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-left">
                                 <span class="px-2 py-1 text-xs font-medium rounded-full text-green-300 bg-green-900 <?php if ($course_type === "Video"): ?> bg-yellow-900 text-yellow-300 <?php endif; ?>"><?= $course_type ?></span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left">??</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left"><?= $category ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-left"><?= $created_at ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">

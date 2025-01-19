@@ -128,4 +128,14 @@ class courseController
 
         include __DIR__ . "/../views/courses.view.php";
     }
+
+    public function coursesAnalyticsDashboardT(){
+        $teacher_id = $_SESSION['user_id'];
+        if ($info = Course::coursesAnalyticsDashboardT($teacher_id)) {
+            extract($info);
+            extract($courses_statics);
+            extract($students_statics);
+            include __DIR__ . "/../views/teacherAnalytics.view.php";
+        }
+    }
 }

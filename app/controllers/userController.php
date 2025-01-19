@@ -37,12 +37,12 @@ class userController
             header("Location: /auth");
         }
         extract($row);
+        $_SESSION['acc_status'] = $acc_status;
         if ($_SESSION['acc_status'] === "Activated") {
             header("Location: /profile");
             $_SESSION['error'] = "";
             $_SESSION['user_id'] = $user_id;
             $_SESSION['acc_type'] = $acc_type;
-            $_SESSION['acc_status'] = $acc_status;
             exit();
         }
         if ($_SESSION['acc_status'] === "Pending") $_SESSION['error'] = "Your accout still pending, wait until it got approved!";
