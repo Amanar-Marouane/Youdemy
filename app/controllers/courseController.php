@@ -115,7 +115,7 @@ class courseController
         $index = getCurrentPageIndex();
         $info = Course::getAllCourses($index, $search);
         extract($info);
-        if ($index < 1 || $index > $total_pages) {
+        if ($index < 1 || $index > $total_pages && $total_pages != 0) {
             header("Location: /courses");
             $_SESSION["error"] = "Nothing Found";
             exit();
