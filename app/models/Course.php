@@ -56,7 +56,6 @@ class Course
                 FROM my_courses
                 JOIN courses ON courses.course_id = my_courses.course_id
                 WHERE courses.author_id = ?";
-
         $info["students_statics"] = $instance->fetch($stmt, $bindParams);
 
         return $info;
@@ -122,6 +121,51 @@ class Course
         $total_course = $instance->fetch($stmt, $bindParam);
         $info["total_pages"] = ceil((int) $total_course["total_courses"] / $limit);
 
+        return $info;
+    }
+
+    public static function coursesAnalyticsDashboardA()
+    {
+        $info = [];
+        $instance = Db::getInstance();
+
+        $courses = "SELECT courses.course_id, courses.course_title, courses.course_type, courses.created_at, categories.category , 
+                    (SELECT COUNT(my_courses.enroll_id) FROM my_courses WHERE my_courses.course_id = courses.course_id) AS total_enrollment
+                    FROM courses 
+                    JOIN categories ON categories.category_id = courses.category_id";
+        $info["courses"] = $instance->fetchAll($courses);
+
+        $stmt = "SELECT COUNT(course_id) AS total_courses,
+                (SELECT COUNT(course_id) FROM courses WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP, created_at) <= 1) AS recent_courses
+                FROM courses";
+        $info["courses_statics"] = $instance->fetch($stmt);
+
+        $stmt = "SELECT COUNT(my_courses.enroll_id) AS total_enrollments,
+                (SELECT COUNT(my_courses.enroll_id)
+                 FROM my_courses
+                 JOIN courses ON courses.course_id = my_courses.course_id
+                 WHERE TIMESTAMPDIFF(MONTH, courses.created_at, CURRENT_TIMESTAMP) <= 1) AS recent_enrollments
+                FROM my_courses
+                JOIN courses ON courses.course_id = my_courses.course_id";
+
+        $info["students_statics"] = $instance->fetch($stmt);
+
+        return $info;
+    }
+
+    public static function adminCoursesManage()
+    {
+        $info = [];
+        $instance = Db::getInstance();
+
+        $stmt = "SELECT courses.*, users.full_name, categories.category
+                 FROM courses
+                 JOIN categories ON categories.category_id = courses.category_id
+                 JOIN users ON users.user_id = courses.author_id";
+        $info["courses"] = $instance->fetchAll($stmt);
+
+        $stmt = "SELECT COUNT(course_id) AS total_courses FROM courses";
+        $info["overview"] = $instance->fetch($stmt);
         return $info;
     }
 }

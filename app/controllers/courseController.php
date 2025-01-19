@@ -138,4 +138,11 @@ class courseController
             include __DIR__ . "/../views/teacherAnalytics.view.php";
         }
     }
+
+    public function adminCoursesManage(){
+        $info = Course::adminCoursesManage();
+        extract($info);
+        extract($overview);
+        include __DIR__ . "/../views/adminCourses.view.php";
+    }
 }

@@ -75,8 +75,6 @@
 
 <script>
     $(document).ready(function() {
-        feather.replace();
-
         $('#searchInput').on('input', function() {
             const searchTerm = $(this).val().toLowerCase();
             $('.search-row').each(function() {

@@ -122,4 +122,9 @@ return [
         "class" => "courseController",
         "method" => "coursesAnalyticsDashboardT",
     ],
+    "admin/courses" => [
+        "path" => "controllers/courseController.php",
+        "class" => "courseController",
+        "method" => "adminCoursesManage",
+    ],
 ];

@@ -8,11 +8,6 @@
         <?php extract($overview) ?>
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-indigo-500">Total Courses</h3>
-                <p class="text-3xl font-bold text-red-300"><?= $total_courses ?></p>
-            </div>
-
-            <div class="bg-gray-800 p-4 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-indigo-500">Total Users</h3>
                 <p class="text-3xl font-bold text-green-300"><?= $total_users ?></p>
             </div>
