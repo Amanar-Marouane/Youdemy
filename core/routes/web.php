@@ -101,5 +101,15 @@ return [
         "path" => "controllers/courseController.php",
         "class" => "courseController",
         "method" => "getAllCourses",
-    ]
+    ],
+    "course/enroll" => [
+        "path" => "controllers/myCoursesController.php",
+        "class" => "MyCoursesController",
+        "method" => "enroll",
+    ],
+    "course/unenroll" => [
+        "path" => "controllers/myCoursesController.php",
+        "class" => "MyCoursesController",
+        "method" => "unenroll",
+    ],
 ];

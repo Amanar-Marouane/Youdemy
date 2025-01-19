@@ -68,7 +68,7 @@ class CourseVideo extends Course
         return true;
     }
 
-    public static function courseDetails($course_id)
+    public static function courseDetails($course_id, $user_id)
     {
         $instance = Db::getInstance();
         $info = [];
@@ -84,6 +84,11 @@ class CourseVideo extends Course
                 JOIN tags ON tags.tag_id = course_tags.tag_id
                 WHERE course_tags.course_id = ?";
         $info["tags"] = $instance->fetchAll($stmt, $bindParam);
+
+        $isEnrolled = "SELECT * FROM my_courses WHERE user_id = ? AND course_id = ?";
+        $bindParams = [$user_id, $course_id];
+        $isEnrolled = $instance->fetch($isEnrolled, $bindParams);
+        $info["isEnrolled"] = $isEnrolled;
 
         return $info;
     }

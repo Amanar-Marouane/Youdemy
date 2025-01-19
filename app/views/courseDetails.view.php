@@ -63,12 +63,71 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
+        <?php if ($_SESSION['acc_type'] === "Student"): ?>
+            <div class="p-8 border-t border-gray-700">
+                <?php if (!$isEnrolled): ?>
+                    <form action="/course/enroll" method="POST">
+                        <input type="hidden" id="user_id" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+                        <input type="hidden" id="course_id" name="course_id" value="<?= $course_id ?>">
+                        <button
+                            type="submit"
+                            class="enrollForm w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                            <i data-feather="book-open" class="w-5 h-5"></i>
+                            <span class="courseStatus">Enroll in This Course</span>
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <form action="/course/unenroll" method="POST">
+                        <input type="hidden" id="user_id" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+                        <input type="hidden" id="course_id" name="course_id" value="<?= $course_id ?>">
+                        <button
+                            type="submit"
+                            class="enrollForm w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                            <i data-feather="book-open" class="w-5 h-5"></i>
+                            <span class="courseStatus">Cancel your enrollement</span>
+                        </button>
+                    </form>
+                <?php endif; ?>
+                <p class="text-gray-400 text-sm text-center mt-4">
+                    Join 253 other students learning this course
+                </p>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    $(document).ready(function() {
         feather.replace();
+
+        function ajaxRequest(user_id, course_id, route) {
+            $.ajax({
+                url: route,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    user_id: user_id,
+                    course_id: course_id,
+                }),
+                success: function(Response) {
+                    location.reload();
+                },
+                error: function() {
+                    $('.error-p').html("Something went wrong, Try again");
+                }
+            })
+        }
+
+        $(document).on('submit', function(e) {
+            e.preventDefault();
+
+            const user_id = $(document.activeElement).closest('form').find('#user_id').val();
+            const course_id = $(document.activeElement).closest('form').find('#course_id').val();
+            const route = $(document.activeElement).closest('form').attr("action");
+
+            ajaxRequest(user_id, course_id, route);
+        })
     });
 </script>
 

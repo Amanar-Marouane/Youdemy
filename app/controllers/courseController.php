@@ -96,11 +96,12 @@ class courseController
     {
         $course_id = $_POST['course_id'];
         $course_type = $_POST['course_type'];
+        $user_id = $_SESSION['user_id'];
 
         if ($course_type === "Video") {
-            $info = CourseVideo::courseDetails($course_id);
+            $info = CourseVideo::courseDetails($course_id, $user_id);
         } else {
-            $info = CourseDoc::courseDetails($course_id);
+            $info = CourseDoc::courseDetails($course_id, $user_id);
         }
         extract($info);
         include __DIR__ . "/../views/courseDetails.view.php";

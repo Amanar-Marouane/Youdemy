@@ -1,6 +1,7 @@
 <?php
 if (PHP_SESSION_NONE) session_start();
 require_once __DIR__ . "/Functions.php";
+require_once __DIR__ . "/Db.php";
 class Router
 {
 

@@ -59,7 +59,7 @@ class Course
 
     public static function courseUpdate($title, $description, $content, $category_id, $course_id, $tags) {}
 
-    public static function courseDetails($course_id) {}
+    public static function courseDetails($course_id, $user_id) {}
 
     public static function getAllCourses($index, $search)
     {
