@@ -61,23 +61,29 @@ class Course
 
     public static function courseDetails($course_id) {}
 
-    public static function getAllCourses($index)
+    public static function getAllCourses($index, $search)
     {
         $info = [];
         $instance = Db::getInstance();
         $limit = 6;
         $offset = $limit * ($index - 1);
-        $bindParams = [$limit, $offset];
+        $bindParams = [$search, $limit, $offset];
 
-        $stmt = "SELECT courses.*, users.full_name FROM courses
-                JOIN users ON users.user_id = courses.author_id
-                ORDER BY created_at LIMIT ? OFFSET ?";
+        $stmt = "SELECT courses.*, users.full_name 
+                 FROM courses
+                 JOIN users ON users.user_id = courses.author_id
+                 WHERE (courses.course_title LIKE ? OR courses.course_title IS NULL)
+                 ORDER BY created_at 
+                 LIMIT ? OFFSET ?";
         $info["courses"] = $instance->fetchAll($stmt, $bindParams);
 
-        $stmt = "SELECT COUNT(course_id) as total_courses FROM courses";
-        $total_course = $instance->fetch($stmt);
-        $info["total_pages"] = ceil ((int) $total_course["total_courses"] / $limit);
-        
+        $stmt = "SELECT COUNT(course_id) as total_courses 
+                 FROM courses 
+                 WHERE course_title LIKE ?";
+        $bindParam = [$search];
+        $total_course = $instance->fetch($stmt, $bindParam);
+        $info["total_pages"] = ceil((int) $total_course["total_courses"] / $limit);
+
         return $info;
     }
 }

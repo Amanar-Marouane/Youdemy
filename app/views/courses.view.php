@@ -2,13 +2,14 @@
 <?php include __DIR__ . "/partial/nav.view.php" ?>
 
 <div class="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 mt-20 pt-2">
-    <form class="max-w-2xl mx-auto mb-8">
+    <form class="max-w-2xl mx-auto mb-8" action="/courses" method="POST">
         <div class="flex gap-2">
             <div class="flex-1 relative">
                 <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
                 <input
                     type="text"
                     name="search"
+                    value="<?= $search ?>"
                     placeholder="Search for courses..."
                     class="w-full bg-gray-800 text-white pl-10 pr-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
@@ -19,7 +20,7 @@
             </button>
         </div>
     </form>
-    
+
     <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($courses as $course):

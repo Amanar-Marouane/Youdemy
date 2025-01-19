@@ -108,13 +108,22 @@ class courseController
 
     public function getAllCourses()
     {
+        $search = "%";
+        if (isset($_POST["search"])) $search = "%" . $_POST["search"] . "%";
+
         $index = getCurrentPageIndex();
-        $info = Course::getAllCourses($index);
+        $info = Course::getAllCourses($index, $search);
         extract($info);
         if ($index < 1 || $index > $total_pages) {
-            header("Location: /home");
+            header("Location: /courses");
+            $_SESSION["error"] = "Nothing Found";
             exit();
         }
+        if ($search === "%") {
+            $search = "";
+        }
+
+        $search = trim($search, "%");
 
         include __DIR__ . "/../views/courses.view.php";
     }
