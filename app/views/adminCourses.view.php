@@ -13,10 +13,6 @@
         </section>
         <div class="flex justify-between items-center mb-8 text-left">
             <h1 class="text-3xl font-bold text-gray-50">My Courses</h1>
-            <button id="addCourseBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                <i data-feather="plus" class="w-5 h-5"></i>
-                New Course
-            </button>
         </div>
 
         <div class="bg-gray-800 rounded-lg p-4 mb-6">

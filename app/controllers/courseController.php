@@ -36,6 +36,7 @@ class courseController
                 }
             }
         }
+        $_SESSION['success'] = "Course has been added successfuly!";
         header("Location: /teacher/courses");
     }
 

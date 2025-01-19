@@ -40,7 +40,7 @@ class userController
         $_SESSION['acc_status'] = $acc_status;
         if ($_SESSION['acc_status'] === "Activated") {
             header("Location: /profile");
-            $_SESSION['error'] = "";
+            $_SESSION['success'] = "You have loged in successfuly";
             $_SESSION['user_id'] = $user_id;
             $_SESSION['acc_type'] = $acc_type;
             exit();
