@@ -58,9 +58,15 @@ class courseController
         if (isset($data["action"])) {
             $action = $data["action"];
             $course_id = $data['course_id'];
+            $course_type = $data['course_type'];
         } else {
             $action = $_POST["action"];
             $course_id = $_POST['course_id'];
+            $course_type = $_POST['course_type'];
+        }
+        if ($course_type === "Document") {
+            $path = Course::getPdfPath($course_id);
+            unlink($path["course_content"]);
         }
 
         if ($action === "delete") {
@@ -73,8 +79,19 @@ class courseController
 
     public function courseUpdate()
     {
+        $regex = '/[<>$&\'";%(){}\[\]\\/|^`]/';
+        if (preg_match($regex, $_POST['course_title']) || preg_match($regex, $_POST['course_desc'])) {
+            $_SESSION['error'] = "Something went wrong, Try again!";
+            header("Location: /teacher/courses");
+            exit();
+        }
         $course_type = $_POST['course_type'];
         if ($course_type === "Video") {
+            if (filter_var($_POST['course_content'], PHP_URL_PATH)) {
+                $_SESSION['error'] = "Something went wrong, Try again!";
+                header("Location: /teacher/courses");
+                exit();
+            }
             if (!CourseVideo::courseUpdate($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST["category_id"], $_POST["course_id"], $_POST['tags'])) {
                 $_SESSION["error"] = "Something Went wrong";
                 header("Location: /teacher/courses");

@@ -60,6 +60,7 @@
                                 <div class="flex gap-3">
                                     <form action="/dashboard/courses/session" class="removeForm" method="POST">
                                         <input type="hidden" name="course_id" id="course_id" value="<?= $course_id ?>">
+                                        <input type="hidden" name="course_type" id="course_type" value="<?= $course_type ?>">
                                         <button type="submit" value="delete" class="text-gray-400 hover:text-red-400 transition-colors">
                                             <i data-feather="trash-2" class="w-5 h-5"></i>
                                         </button>
@@ -75,7 +76,7 @@
 </div>
 
 <script>
-    function ajaxRequest(action, course_id, target_element, route) {
+    function ajaxRequest(action, course_id, target_element, route, course_type) {
         $.ajax({
             url: route,
             type: 'POST',
@@ -83,6 +84,7 @@
             data: JSON.stringify({
                 action: action,
                 course_id: course_id,
+                course_type: course_type,
             }),
             success: function(Response) {
                 target_element.remove();
@@ -106,10 +108,11 @@
         $(".removeForm").on('submit', function(e) {
             e.preventDefault();
             const course_id = $(document.activeElement).closest('form').find('#course_id').val();
+            const course_type = $(document.activeElement).closest('form').find('#course_type').val();
             const target_element = $(document.activeElement).closest('tr');
             const route = $(document.activeElement).closest('form').attr("action");
 
-            ajaxRequest("delete", course_id, target_element, route);
+            ajaxRequest("delete", course_id, target_element, route, course_type);
         });
 
     });

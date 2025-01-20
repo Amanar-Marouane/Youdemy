@@ -175,4 +175,11 @@ class Course
         $info["overview"] = $instance->fetch($stmt);
         return $info;
     }
+    public static function getPdfPath($course_id){
+        $instance = Db::getInstance();
+
+        $stmt = "SELECT course_content FROM courses WHERE course_id = ?";
+        $bindParam = [$course_id];
+        return $instance->fetch($stmt, $bindParam);
+    }
 }

@@ -38,6 +38,12 @@ class CourseDoc extends Course
     {
         $instance = Db::getInstance();
         $instance->transaction();
+        if (!is_null($content)) {
+            $stmt = "SELECT course_content FROM courses WHERE course_id = ?";
+            $bindParam = [$course_id];
+            $old_course = $instance->fetch($stmt, $bindParam);
+            unlink($old_course['course_content']);
+        }
 
         $updateMainInfo = "UPDATE courses
                             set course_title = ?, course_desc = ?, course_type = 'Document', course_content = CASE WHEN ? IS NULL THEN course_content ELSE ? END, category_id = ?
