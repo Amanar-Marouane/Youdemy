@@ -16,8 +16,19 @@ class courseController
 
     public function courseAdd()
     {
+        $regex = '/[<>$&\'";%(){}\[\]\\/|^`]/';
+        if (preg_match($regex, $_POST['course_title']) || preg_match($regex, $_POST['course_desc'])) {
+            $_SESSION['error'] = "Something went wrong, Try again!";
+            header("Location: /teacher/courses");
+            exit();
+        }
         $course_type = $_POST['course_type'];
         if ($course_type === "Video") {
+            if (filter_var($_POST['course_content'], PHP_URL_PATH)) {
+                $_SESSION['error'] = "Something went wrong, Try again!";
+                header("Location: /teacher/courses");
+                exit();
+            }
             if (!CourseVideo::courseAdd($_POST['course_title'], $_POST['course_desc'], $_POST['course_content'], $_POST['category_id'], $_POST['tags'])) {
                 $_SESSION["error"] = "Something Went wrong";
             }

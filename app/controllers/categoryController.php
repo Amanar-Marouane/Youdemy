@@ -24,6 +24,6 @@ class categoryController
         $category = $_POST['category_name'];
         if (Category::categoriesAdding($category)) $_SESSION["success"] = "Category has been added succesfuly";
         else $_SESSION["error"] = "Category has not been added succesfuly or it's already exist";
-        header("Location: /dashboard/categories");
+        header("Location: /admin/categories");
     }
 }

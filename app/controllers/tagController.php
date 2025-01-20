@@ -24,6 +24,6 @@ class tagController
         $tags = $_POST['tag_content'];
         Tag::tagAdding($tags);
         $_SESSION['success'] = "Tag has been added successfuly (Prevent duplication : ON)";
-        header("Location: /dashboard/tags");
+        header("Location: /admin/tags");
     }
 }
