@@ -263,7 +263,7 @@
                     <div class="text-right text-sm text-gray-400 mt-1 desc-tracker flex items-center justify-between" style="visibility: hidden;">
                         <span class="desc-tracker-text"></span>
                         <span>
-                            <span id="charCount">0</span>/255 characters
+                            <span id="charCount">0</span>/3000 characters
                         </span>
                     </div>
                     <div id="description-error-message" class="text-red-500 text-sm"></div>
