@@ -9,24 +9,29 @@ class Admin extends User
     {
         $info = [];
         $instance = Db::getInstance();
-
-        $overwiew = "SELECT COUNT(course_id) AS total_courses, 
+        try {
+            $instance->transaction();
+            $overwiew = "SELECT COUNT(course_id) AS total_courses, 
                     (SELECT COUNT(user_id) FROM users) AS total_users, 
                     (SELECT COUNT(user_id) FROM users WHERE acc_status = 'Pending') AS total_pending, 
                     (SELECT COUNT(user_id) FROM users WHERE acc_type = 'Teacher') AS total_teachers, 
                     (SELECT COUNT(user_id) FROM users WHERE acc_type = 'Student') AS total_students 
                     FROM courses;";
-        $info["overview"] = $instance->fetch($overwiew);
+            $info["overview"] = $instance->fetch($overwiew);
 
-        $pending_accounts = "SELECT user_id, full_name, email, created_at FROM users WHERE acc_status = 'Pending';";
-        $info["pending_accounts"] = $instance->fetchAll($pending_accounts);
+            $pending_accounts = "SELECT user_id, full_name, email, created_at FROM users WHERE acc_status = 'Pending';";
+            $info["pending_accounts"] = $instance->fetchAll($pending_accounts);
 
-        $sespended_accounts = "SELECT user_id, full_name, email, acc_type, suspension_date FROM users WHERE acc_status = 'Suspended';";
-        $info["sespended_accounts"] = $instance->fetchAll($sespended_accounts);
+            $sespended_accounts = "SELECT user_id, full_name, email, acc_type, suspension_date FROM users WHERE acc_status = 'Suspended';";
+            $info["sespended_accounts"] = $instance->fetchAll($sespended_accounts);
 
-        $activated_accounts = "SELECT user_id, full_name, email, acc_type, created_at FROM users WHERE acc_status = 'Activated' AND acc_type != 'Admin';";
-        $info["activated_accounts"] = $instance->fetchAll($activated_accounts);
-
+            $activated_accounts = "SELECT user_id, full_name, email, acc_type, created_at FROM users WHERE acc_status = 'Activated' AND acc_type != 'Admin';";
+            $info["activated_accounts"] = $instance->fetchAll($activated_accounts);
+        } catch (Exception) {
+        $instance->rollback();
+        return false;
+        }
+        $instance->commit();
         return $info;
     }
 
