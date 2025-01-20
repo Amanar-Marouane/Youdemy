@@ -157,6 +157,75 @@
             $('#courseContentFile').hide();
         }
 
+        $("#courseDesc").on('focus', function() {
+            $(".desc-tracker").css("visibility", "visible");
+        });
+
+        $("#courseDesc").on('blur', function() {
+            $(".desc-tracker").css("visibility", "hidden");
+        });
+
+        $("#courseDesc").on('input', function(e) {
+            let count = e.target.value.length;
+            $("#charCount").text(count);
+            $(".desc-tracker-text").text("");
+            $(".desc-tracker").css("color", "#9ca3af");
+
+            if (count >= 3000) {
+                e.target.value = e.target.value.slice(0, 3000);
+                $("#charCount").text(e.target.value.length);
+                $(".desc-tracker-text").text("You have reached the maximum length");
+                $(".desc-tracker").css("color", "red");
+            }
+        });
+
+        $("#courseTitle").on('focus', function() {
+            $(".title-tracker").css("visibility", "visible");
+        });
+
+        $("#courseTitle").on('blur', function() {
+            $(".title-tracker").css("visibility", "hidden");
+        });
+
+        $("#courseTitle").on('input', function(e) {
+            let count = e.target.value.length;
+            $("#titleCharCount").text(count);
+            $(".title-tracker-text").text("");
+            $(".title-tracker").css("color", "#9ca3af");
+
+            if (count >= 255) {
+                e.target.value = e.target.value.slice(0, 255);
+                $("#titleCharCount").text(e.target.value.length);
+                $(".title-tracker-text").text("You have reached the maximum length");
+                $(".title-tracker").css("color", "red");
+            }
+        });
+
+        const regex = /[<>$&'";%(){}[\]\\/|^`]/g;
+
+        $('#courseForm').on("submit", function(e) {
+            let error = false;
+            $("#description-error-message").text("");
+            $("#title-error-message").text("");
+            if (regex.test($("#courseDesc").val())) {
+                $("#description-error-message").text("Special characters are not allowed.");
+                error = true;
+            }
+            if (regex.test($("#courseTitle").val())) {
+                $("#title-error-message").text("Special characters are not allowed.");
+                error = true;
+            }
+
+            const selectedOption = $('#categories').prop('selectedIndex');
+            if (selectedOption === 0) {
+                $("#select-error-message").text("Please select an option.");
+                error = true;
+            }
+
+            if (error) {
+                e.preventDefault();
+            }
+        })
     });
 </script>
 
@@ -178,12 +247,26 @@
                     <label class="block text-sm font-medium text-gray-300 mb-2">Course Title</label>
                     <input type="text" id="courseTitle" name="course_title" required
                         class="w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <div class="text-right text-sm text-gray-400 mt-1 title-tracker flex items-center justify-between" style="visibility: hidden;">
+                        <span class="title-tracker-text"></span>
+                        <span>
+                            <span id="titleCharCount">0</span>/255 characters
+                        </span>
+                    </div>
+                    <div id="title-error-message" class="text-red-500 text-sm"></div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Course Description</label>
                     <textarea id="courseDesc" name="course_desc" rows="4" required
                         class="w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    <div class="text-right text-sm text-gray-400 mt-1 desc-tracker flex items-center justify-between" style="visibility: hidden;">
+                        <span class="desc-tracker-text"></span>
+                        <span>
+                            <span id="charCount">0</span>/255 characters
+                        </span>
+                    </div>
+                    <div id="description-error-message" class="text-red-500 text-sm"></div>
                 </div>
 
                 <div>
@@ -206,7 +289,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Category</label>
-                    <select id="categoryId" name="category_id" required
+                    <select id="categories" name="category_id" required
                         class="w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         <option disabled selected>-- Select Category --</option>
                         <?php foreach ($categories as $category):
@@ -214,6 +297,7 @@
                             <option value="<?= $category_id ?>"><?= $category ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <div id="select-error-message" class="text-red-500 text-sm"></div>
                 </div>
 
                 <div>
