@@ -39,7 +39,7 @@
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Admin"): ?>
                             <li>
-                                <a href="/dashboard/accounts" class="<?php if ("dashboard/accounts" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
+                                <a href="/admin/accounts" class="<?php if ("dashboard/accounts" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Dashboard</a>
                             </li>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user_id']) && $_SESSION['acc_type'] === "Teacher"): ?>

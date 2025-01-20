@@ -8,11 +8,25 @@ class userController
 
     public function register()
     {
-        $fullname = fullnameValidation($_POST['fullname']);
-        if (passwordValidation($_POST['password'])) {
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        }
-        $email = emailValidation($_POST['email']);
+        if (!$fullname = fullnameValidation($_POST['fullname'])) {
+            $_SESSION['error'] = "error something went wrong";
+            header("Location: /auth");
+            exit();
+        };
+
+        if (!$password = passwordValidation($_POST['password'])) {
+            $_SESSION['error'] = "error something went wrong";
+            header("Location: /auth");
+            exit();
+        };
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        if (!$email = emailValidation($_POST['email'])) {
+            $_SESSION['error'] = "error something went wrong";
+            header("Location: /auth");
+            exit();
+        };
+
         $acc_type = $_POST["acc_type"];
         $status = "Activated";
         $profile_img = "https://media1.giphy.com/media/xUNd9AWlNxNgnxiIxO/200.webp?cid=790b7611t1g2yq5q33qrlqd4nwu34ijz68j6lmyg3abln5da&ep=v1_gifs_search&rid=200.webp&ct=g";
@@ -20,9 +34,11 @@ class userController
             $status = "Pending";
             $profile_img = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRueHhlYnp3cmVkZWE3aGh6bnh3dWVxdzRtamMzMXgwenJkZmZ4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vVKqa0NMZzFyE/200.webp";
         }
+        
         if (!User::inscribe($fullname, $email, $acc_type, $password, $status, $profile_img)) {
             $_SESSION['error'] = "error something went wrong";
             header("Location: /auth");
+            exit();
         }
         header("Location: /auth");
     }

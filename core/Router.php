@@ -2,6 +2,8 @@
 if (PHP_SESSION_NONE) session_start();
 require_once __DIR__ . "/Functions.php";
 require_once __DIR__ . "/Db.php";
+require_once __DIR__ . "/Midleware.php";
+
 class Router
 {
 
@@ -16,6 +18,9 @@ class Router
             $_SESSION['success'] = "";
         }
 
+        $acc_type = get_acc_type();
+        Midleware::permissionChecker($uri, $acc_type);
+        
         if (key_exists($uri, $routes)) {
             if (is_array($routes[$uri])) {
                 $path = $routes[$uri]['path'];
@@ -29,6 +34,15 @@ class Router
             }
         } else {
             include __DIR__ . "/../app/views/404.view.php";
+        }
+    }
+
+    public static function get_acc_type()
+    {
+        if (!isset($_SESSION['acc_type'])) {
+            return "Visitor";
+        } else {
+            return $_SESSION['acc_type'];
         }
     }
 }

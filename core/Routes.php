@@ -22,7 +22,7 @@ return [
         "class" => "userController",
         "method" => "logout",
     ],
-    "dashboard/accounts" => [
+    "admin/accounts" => [
         "path" => "controllers/userController.php",
         "class" => "userController",
         "method" => "accountsDashboardRendering",
@@ -42,7 +42,7 @@ return [
         "class" => "userController",
         "method" => "accountSuspension",
     ],
-    "dashboard/categories" => [
+    "admin/categories" => [
         "path" => "controllers/categoryController.php",
         "class" => "categoryController",
         "method" => "categoriesDashboardRendering",
@@ -57,7 +57,7 @@ return [
         "class" => "categoryController",
         "method" => "categoriesAdding",
     ],
-    "dashboard/tags" => [
+    "admin/tags" => [
         "path" => "controllers/tagController.php",
         "class" => "tagController",
         "method" => "tagsDashboardRendering",

@@ -1,4 +1,5 @@
 <?php include __DIR__ . "/partial/header.view.php" ?>
+<?php if(isset($_SESSION['user_id'])) header("Location: /home") ?>
 
 <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col items-center justify-center select-none">
     <p class="bg-red-900 text-red-300 text-xs font-medium  rounded top-0 z-30 absolute w-full text-center error-p">
