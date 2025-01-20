@@ -8,7 +8,7 @@ class Router
     public static function URI_Handler()
     {
         $uri = getURI();
-        $routes = require_once __DIR__ . "/routes/web.php";
+        $routes = require_once __DIR__ . "/Routes.php";
         if (!isset($_SESSION['error'])) {
             $_SESSION['error'] = "";
         }
