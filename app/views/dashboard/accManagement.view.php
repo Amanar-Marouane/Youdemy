@@ -1,8 +1,8 @@
-<?php include __DIR__ . "/partial/header.view.php" ?>
-<?php include __DIR__ . "/partial/nav.view.php" ?>
+<?php include __DIR__ . "/../partial/header.view.php" ?>
+<?php include __DIR__ . "/../partial/nav.view.php" ?>
 
 <div class="min-h-[90vh] flex items-start py-32 sm:py-48 lg:py-20 text-center html">
-    <?php include __DIR__ . "/partial/dashboardSideBar.view.php" ?>
+    <?php include __DIR__ . "/../partial/dashboardSideBar.view.php" ?>
 
     <main class="flex-1 p-6">
         <?php extract($overview) ?>
@@ -179,7 +179,7 @@
     </main>
 </div>
 
-<?php include __DIR__ . "/partial/footer.view.php" ?>
+<?php include __DIR__ . "/../partial/footer.view.php" ?>
 
 <script>
     function ajaxRequest(action, user_id, target_element, route) {

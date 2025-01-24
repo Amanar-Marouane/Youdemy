@@ -1,8 +1,8 @@
-<?php include __DIR__ . "/partial/header.view.php" ?>
-<?php include __DIR__ . "/partial/nav.view.php" ?>
+<?php include __DIR__ . "/../partial/header.view.php" ?>
+<?php include __DIR__ . "/../partial/nav.view.php" ?>
 
 <div class="min-h-[90vh] flex items-start py-32 sm:py-48 lg:py-20 text-center html">
-    <?php include __DIR__ . "/partial/dashboardSideBar.view.php" ?>
+    <?php include __DIR__ . "/../partial/dashboardSideBar.view.php" ?>
 
     <div class="flex-1 mx-4">
         <div class="max-w-7xl mx-auto px-4 mb-6 mt-5">
@@ -54,4 +54,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . "/partial/footer.view.php" ?>
+<?php include __DIR__ . "/../partial/footer.view.php" ?>

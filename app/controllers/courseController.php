@@ -11,7 +11,7 @@ class courseController
     {
         if ($info = Course::coursesDashboardRenderingT()) {
             extract($info);
-            include __DIR__ . "/../views/teacherCourses.view.php";
+            include __DIR__ . "/../views/dashboard/teacherCourses.view.php";
         }
     }
 

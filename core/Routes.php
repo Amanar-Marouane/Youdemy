@@ -1,7 +1,7 @@
 <?php
 return [
     "home" => "views/home.view.php",
-    "auth" => "views/auth.view.php",
+    "auth" => "views/auth/auth.view.php",
     "auth/register" => [
         "class" => "userController",
         "method" => "register",

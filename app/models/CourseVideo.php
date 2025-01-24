@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use core\Db;
 
 class CourseVideo extends Course

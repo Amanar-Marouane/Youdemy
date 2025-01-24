@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . "/../../core/Db.php";
+
+namespace app\models;
+
+use core\Db;
 
 class Tag
 {

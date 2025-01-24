@@ -20,20 +20,20 @@
                 <h1 class="text-3xl font-bold text-white">My Courses</h1>
                 <p class="mt-2 text-gray-400">Track your learning progress across all enrolled courses</p>
             </div>
-            <?php foreach ($courses as $course):
-                extract($course);
-                if ($course_type === 'Video') {
-                    preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $course_content, $matches);
-                    if (isset($matches[1])) {
-                        $videoId = $matches[1];
-                        $thumbnailUrl = "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg";
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <?php foreach ($courses as $course):
+                    extract($course);
+                    if ($course_type === 'Video') {
+                        preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $course_content, $matches);
+                        if (isset($matches[1])) {
+                            $videoId = $matches[1];
+                            $thumbnailUrl = "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg";
+                        } else {
+                            $thumbnailUrl = 'https://media.tenor.com/7Y9-DR6rYYIAAAAM/calopsita-video-call.gif';
+                        }
                     } else {
-                        $thumbnailUrl = 'https://media.tenor.com/7Y9-DR6rYYIAAAAM/calopsita-video-call.gif';
-                    }
-                } else {
-                    $thumbnailUrl = 'https://media.tenor.com/u1RFpg4SLngAAAAM/travolta-pdf.gif';
-                } ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        $thumbnailUrl = 'https://media.tenor.com/u1RFpg4SLngAAAAM/travolta-pdf.gif';
+                    } ?>
                     <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden">
                         <div class="aspect-video bg-gray-700">
                             <img src="<?= $thumbnailUrl ?>" class="bg-cover w-full h-full">
@@ -53,9 +53,9 @@
                             </form>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            </div>
     </div>
 </div>
 

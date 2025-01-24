@@ -1,5 +1,7 @@
 <?php
+
 namespace app\models;
+
 use core\Db;
 
 class CourseDoc extends Course

@@ -1,5 +1,7 @@
 <?php
+
 namespace app\models;
+
 use core\Db;
 
 class Course
@@ -176,7 +178,8 @@ class Course
         $info["overview"] = $instance->fetch($stmt);
         return $info;
     }
-    public static function getPdfPath($course_id){
+    public static function getPdfPath($course_id)
+    {
         $instance = Db::getInstance();
 
         $stmt = "SELECT course_content FROM courses WHERE course_id = ?";

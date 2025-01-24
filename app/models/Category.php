@@ -1,4 +1,7 @@
 <?php
+
+namespace app\models;
+
 use core\Db;
 
 class category

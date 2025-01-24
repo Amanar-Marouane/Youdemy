@@ -5,7 +5,7 @@ require_once __DIR__ . "/Functions.php";
 require_once __DIR__ . "/AutoLoader.php";
 
 use core\{Db, Midleware};
-use app\controllers\courseController;
+use app\controllers\{courseController, tagController, categoryController, userController, MyCoursesController};
 
 AutoLoader::autoloader();
 class Router
@@ -51,8 +51,8 @@ class Router
                 return new userController;
                 break;
 
-            case "userController":
-                return new userController;
+            case "MyCoursesController":
+                return new MyCoursesController;
                 break;
         }
     }

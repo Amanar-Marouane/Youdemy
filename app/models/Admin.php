@@ -1,6 +1,9 @@
 <?php
-require_once __DIR__ . "/../../core/Db.php";
-require_once __DIR__ . "/User.php";
+
+namespace app\models;
+
+use core\Db;
+use Exception;
 
 class Admin extends User
 {
@@ -28,8 +31,8 @@ class Admin extends User
             $activated_accounts = "SELECT user_id, full_name, email, acc_type, created_at FROM users WHERE acc_status = 'Activated' AND acc_type != 'Admin';";
             $info["activated_accounts"] = $instance->fetchAll($activated_accounts);
         } catch (Exception) {
-        $instance->rollback();
-        return false;
+            $instance->rollback();
+            return false;
         }
         $instance->commit();
         return $info;
