@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/../../core/Db.php";
-require_once __DIR__ . "/Course.php";
+namespace app\models;
+use core\Db;
 
 class CourseDoc extends Course
 {

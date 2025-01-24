@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . "/../models/Course.php";
-require_once __DIR__ . "/../models/CourseVideo.php";
-require_once __DIR__ . "/../models/CourseDoc.php";
+
+namespace app\controllers;
+
+use app\models\{CourseVideo, CourseDoc, Course};
 
 class courseController
 {
@@ -73,7 +74,7 @@ class courseController
             if (Course::courseRemove($course_id)) echo "The course has been removed successfully";
         } else {
             $info = Course::courseSession($course_id);
-            include_once __DIR__ . "/../views/courseEditForm.view.php";
+            include_once __DIR__ . "/../views/courses/courseEditForm.view.php";
         }
     }
 
@@ -133,7 +134,7 @@ class courseController
             $info = CourseDoc::courseDetails($course_id, $user_id);
         }
         extract($info);
-        include __DIR__ . "/../views/courseDetails.view.php";
+        include __DIR__ . "/../views/courses/courseDetails.view.php";
     }
 
     public function getAllCourses()
@@ -155,7 +156,7 @@ class courseController
 
         $search = trim($search, "%");
 
-        include __DIR__ . "/../views/courses.view.php";
+        include __DIR__ . "/../views/courses/courses.view.php";
     }
 
     public function coursesAnalyticsDashboardT()
@@ -165,7 +166,7 @@ class courseController
             extract($info);
             extract($courses_statics);
             extract($students_statics);
-            include __DIR__ . "/../views/teacherAnalytics.view.php";
+            include __DIR__ . "/../views/dashboard/teacherAnalytics.view.php";
         }
     }
 
@@ -174,7 +175,7 @@ class courseController
         $info = Course::adminCoursesManage();
         extract($info);
         extract($overview);
-        include __DIR__ . "/../views/adminCourses.view.php";
+        include __DIR__ . "/../views/dashboard/adminCourses.view.php";
     }
 
     public function adminaAnalytics()
@@ -183,6 +184,6 @@ class courseController
         extract($info);
         extract($courses_statics);
         extract($students_statics);
-        include __DIR__ . "/../views/adminAnalytics.view.php";
+        include __DIR__ . "/../views/dashboard/adminAnalytics.view.php";
     }
 }

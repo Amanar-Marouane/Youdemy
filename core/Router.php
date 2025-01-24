@@ -1,9 +1,13 @@
 <?php
 if (PHP_SESSION_NONE) session_start();
-require_once __DIR__ . "/Functions.php";
-require_once __DIR__ . "/Db.php";
-require_once __DIR__ . "/Midleware.php";
 
+require_once __DIR__ . "/Functions.php";
+require_once __DIR__ . "/AutoLoader.php";
+
+use core\{Db, Midleware};
+use app\controllers\courseController;
+
+AutoLoader::autoloader();
 class Router
 {
 
@@ -11,23 +15,16 @@ class Router
     {
         $uri = getURI();
         $routes = require_once __DIR__ . "/Routes.php";
-        if (!isset($_SESSION['error'])) {
-            $_SESSION['error'] = "";
-        }
-        if (!isset($_SESSION['success'])) {
-            $_SESSION['success'] = "";
-        }
+        messagesHandler();
 
         $acc_type = get_acc_type();
         Midleware::permissionChecker($uri, $acc_type);
-        
+
         if (key_exists($uri, $routes)) {
             if (is_array($routes[$uri])) {
-                $path = $routes[$uri]['path'];
-                $class = $routes[$uri]['class'];
                 $method = $routes[$uri]['method'];
-                include __DIR__ . "/../app/" . $path;
-                $instance = new $class();
+                $class = $routes[$uri]['class'];
+                $instance = self::controllersCaller($class);
                 $instance->$method();
             } else {
                 include __DIR__ . "/../app/$routes[$uri]";
@@ -35,12 +32,28 @@ class Router
         }
     }
 
-    public static function get_acc_type()
+    public static function controllersCaller($class)
     {
-        if (!isset($_SESSION['acc_type'])) {
-            return "Visitor";
-        } else {
-            return $_SESSION['acc_type'];
+        switch ($class) {
+            case "courseController":
+                return new courseController;
+                break;
+
+            case "tagController":
+                return new tagController;
+                break;
+
+            case "categoryController":
+                return new categoryController;
+                break;
+
+            case "userController":
+                return new userController;
+                break;
+
+            case "userController":
+                return new userController;
+                break;
         }
     }
 }

@@ -1,5 +1,5 @@
-<?php include __DIR__ . "/partial/header.view.php" ?>
-<?php include __DIR__ . "/partial/nav.view.php" ?>
+<?php include __DIR__ . "/../partial/header.view.php" ?>
+<?php include __DIR__ . "/../partial/nav.view.php" ?>
 
 <div class="min-h-[85vh] bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 relative mt-10">
     <div class="max-w-7xl mx-auto">
@@ -59,4 +59,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . "/partial/footer.view.php" ?>
+<?php include __DIR__ . "/../partial/footer.view.php" ?>

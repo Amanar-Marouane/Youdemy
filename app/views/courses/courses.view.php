@@ -1,5 +1,5 @@
-<?php include __DIR__ . "/partial/header.view.php" ?>
-<?php include __DIR__ . "/partial/nav.view.php" ?>
+<?php include __DIR__ . "/../partial/header.view.php" ?>
+<?php include __DIR__ . "/../partial/nav.view.php" ?>
 
 <div class="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 mt-20 pt-2">
     <?php if ($total_pages == 0): ?>
@@ -92,4 +92,4 @@
     <?php endif ?>
 </div>
 
-<?php include __DIR__ . "/partial/footer.view.php" ?>
+<?php include __DIR__ . "/../partial/footer.view.php" ?>

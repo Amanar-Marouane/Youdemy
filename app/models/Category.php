@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../core/Db.php";
+use core\Db;
 
 class category
 {
