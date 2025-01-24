@@ -1,6 +1,9 @@
 <?php
+
 namespace core;
+
 use PDO;
+use Dotenv\Dotenv;
 
 class Db
 {
@@ -9,8 +12,15 @@ class Db
 
     public function __construct()
     {
-        $config = include __DIR__ . "/../app/config/Db.php";
-        extract($config);
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+        extract($_ENV);
+        $servername = $DB_SERVERNAME;
+        $username = $DB_USERNAME;
+        $password = $DB_PASSWORD;
+        $dbname = $DB_NAME;
+        $options = json_decode($DB_OPTIONS, true);
+
         $dsn = "mysql:host=$servername;dbname=$dbname";
         $this->pdo = new PDO($dsn, $username, $password, $options);
     }

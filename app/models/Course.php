@@ -107,25 +107,28 @@ class Course
         $instance = Db::getInstance();
         $limit = 6;
         $offset = $limit * ($index - 1);
-        $bindParams = [$search, $limit, $offset];
+
+        $bindParams = ["%$search%"];
 
         $stmt = "SELECT courses.*, users.full_name 
-                 FROM courses
-                 JOIN users ON users.user_id = courses.author_id
-                 WHERE (courses.course_title LIKE ? OR courses.course_title IS NULL)
-                 ORDER BY created_at 
-                 LIMIT ? OFFSET ?";
+             FROM courses
+             JOIN users ON users.user_id = courses.author_id
+             WHERE (courses.course_title LIKE ? OR courses.course_title IS NULL)
+             ORDER BY created_at 
+             LIMIT $offset, $limit";
         $info["courses"] = $instance->fetchAll($stmt, $bindParams);
 
         $stmt = "SELECT COUNT(course_id) as total_courses 
-                 FROM courses 
-                 WHERE course_title LIKE ?";
-        $bindParam = [$search];
+             FROM courses 
+             WHERE course_title LIKE ?";
+        $bindParam = ["%$search%"];
         $total_course = $instance->fetch($stmt, $bindParam);
+
         $info["total_pages"] = ceil((int) $total_course["total_courses"] / $limit);
 
         return $info;
     }
+
 
     public static function adminAnalyticsDashboard()
     {
