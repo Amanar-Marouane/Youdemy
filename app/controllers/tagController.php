@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . "/../models/Tag.php";
+
+namespace app\controllers;
+
+use app\models\Tag;
 
 class tagController
 {
@@ -8,11 +11,12 @@ class tagController
     {
         if ($info = Tag::tagsDashboardRendering()) {
             extract($info);
-            include __DIR__ . "/../views/tagsManagement.view.php";
+            include __DIR__ . "/../views/dashboard/tagsManagement.view.php";
         }
     }
 
-    public function tagDeletion(){
+    public function tagDeletion()
+    {
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
 
@@ -20,7 +24,8 @@ class tagController
         Tag::tagDeletion($tag_id);
     }
 
-    public function tagAdding(){
+    public function tagAdding()
+    {
         $tags = $_POST['tag_content'];
         Tag::tagAdding($tags);
         $_SESSION['success'] = "Tag has been added successfuly (Prevent duplication : ON)";

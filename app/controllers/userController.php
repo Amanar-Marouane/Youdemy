@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . "/../models/User.php";
-require_once __DIR__ . "/../models/Admin.php";
-require_once __DIR__ . "/../models/Teacher.php";
+
+namespace app\controllers;
+
+use app\models\{User, Admin, Teacher};
 
 class userController
 {
@@ -34,7 +35,7 @@ class userController
             $status = "Pending";
             $profile_img = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRueHhlYnp3cmVkZWE3aGh6bnh3dWVxdzRtamMzMXgwenJkZmZ4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vVKqa0NMZzFyE/200.webp";
         }
-        
+
         if (!User::inscribe($fullname, $email, $acc_type, $password, $status, $profile_img)) {
             $_SESSION['error'] = "error something went wrong";
             header("Location: /auth");
@@ -87,7 +88,7 @@ class userController
     {
         if ($info = Admin::accountsDashboardRendering()) {
             extract($info);
-            include __DIR__ . "/../views/accManagement.view.php";
+            include __DIR__ . "/../views/dashboard/accManagement.view.php";
         }
     }
 

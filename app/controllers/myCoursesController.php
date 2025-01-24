@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . "/../models/MyCourses.php";
+
+namespace app\controllers;
+
+use app\models\MyCourses;
 
 class MyCoursesController
 {
@@ -43,6 +46,6 @@ class MyCoursesController
             exit();
         }
         extract($info);
-        include __DIR__ . "/../views/studentCourses.view.php";
+        include __DIR__ . "/../views/courses/studentCourses.view.php";
     }
 }

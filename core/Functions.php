@@ -57,3 +57,13 @@ function get_acc_type()
         return $_SESSION['acc_type'];
     }
 }
+
+function messagesHandler()
+{
+    if (!isset($_SESSION['error'])) {
+        $_SESSION['error'] = "";
+    }
+    if (!isset($_SESSION['success'])) {
+        $_SESSION['success'] = "";
+    }
+}
