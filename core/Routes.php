@@ -132,4 +132,5 @@ return [
         "class" => "courseController",
         "method" => "adminaAnalytics",
     ],
+    "404" => "views/404.view.php",
 ];

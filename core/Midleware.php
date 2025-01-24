@@ -8,7 +8,7 @@ class Midleware
         if ($acc_type === "Admin" || $acc_type === "Teacher") return;
         $permissions = require_once __DIR__ . "/UserPermissions.php";
         if (!in_array($uri, $permissions[$acc_type])) {
-            header("Location: /home");
+            header("Location: /404");
         }
     }
 }

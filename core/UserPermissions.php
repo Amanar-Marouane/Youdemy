@@ -3,7 +3,8 @@ return [
     "Visitor" => [
         "home",
         "auth",
-        "courses"
+        "courses",
+        "404",
     ],
     "Student" => [
         "home",
@@ -14,5 +15,6 @@ return [
         "course/enroll",
         "course/unenroll",
         "mycourses",
+        "404",
     ],
 ];

@@ -32,8 +32,6 @@ class Router
             } else {
                 include __DIR__ . "/../app/$routes[$uri]";
             }
-        } else {
-            include __DIR__ . "/../app/views/404.view.php";
         }
     }
 
