@@ -4,56 +4,37 @@ if (PHP_SESSION_NONE) session_start();
 require_once __DIR__ . "/Functions.php";
 require_once __DIR__ . "/AutoLoader.php";
 
-use core\{Db, Midleware};
-use app\controllers\{courseController, tagController, categoryController, userController, MyCoursesController};
-
 AutoLoader::autoloader();
 class Router
 {
+    private array $routes = [];
 
-    public static function URI_Handler()
+    public function URI_Handler(string $uri, $filePath, $class = null, $method = null): void
     {
-        $uri = getURI();
-        $routes = require_once __DIR__ . "/Routes.php";
-        messagesHandler();
-
-        $acc_type = get_acc_type();
-        Midleware::permissionChecker($uri, $acc_type);
-
-        if (key_exists($uri, $routes)) {
-            if (is_array($routes[$uri])) {
-                $method = $routes[$uri]['method'];
-                $class = $routes[$uri]['class'];
-                $instance = self::controllersCaller($class);
-                $instance->$method();
-            } else {
-                include __DIR__ . "/../app/$routes[$uri]";
-            }
-        }
+        $this->routes[] = [
+            "uri" => $uri,
+            "path" => $filePath,
+            "class" => $class,
+            "method" => $method
+        ];
     }
 
-    public static function controllersCaller($class)
+    public function dispatch(string $uri): void
     {
-        switch ($class) {
-            case "courseController":
-                return new courseController;
-                break;
-
-            case "tagController":
-                return new tagController;
-                break;
-
-            case "categoryController":
-                return new categoryController;
-                break;
-
-            case "userController":
-                return new userController;
-                break;
-
-            case "MyCoursesController":
-                return new MyCoursesController;
-                break;
+        messagesHandler();
+        foreach ($this->routes as $route) {
+            $pattern =  preg_replace("#\{\w+\}#", "([^\/]+)", $route["uri"]);
+            if (preg_match("#^$pattern$#", $uri, $matches)) {
+                if (!is_null($route["class"])) {
+                    $instance = $route["class"];
+                    $method = $route["method"];
+                    call_user_func_array([$instance, $method], [$matches[1]]);
+                    return;
+                }
+                include __DIR__ . "/../app/{$route["path"]}";
+                return;
+            }
         }
+        include __DIR__ . "/../app/views/404.view.php";
     }
 }

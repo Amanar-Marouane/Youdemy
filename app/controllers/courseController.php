@@ -137,12 +137,11 @@ class courseController
         include __DIR__ . "/../views/courses/courseDetails.view.php";
     }
 
-    public function getAllCourses()
+    public function getAllCourses($index)
     {
         $search = "%";
         if (isset($_POST["search"])) $search = "%" . $_POST["search"] . "%";
 
-        $index = getCurrentPageIndex();
         $info = Course::getAllCourses($index, $search);
         extract($info);
         if ($index < 1 || $index > $total_pages && $total_pages != 0) {

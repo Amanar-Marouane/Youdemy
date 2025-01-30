@@ -41,14 +41,6 @@ function fullnameValidation($fullname)
     return false;
 }
 
-function getCurrentPageIndex()
-{
-    $uri = strtolower(trim($_SERVER['REQUEST_URI'], "/"));
-    if ($uri === "courses") return 1;
-    $lastSlashPosition = strrpos($uri, '?');
-    return substr($uri, $lastSlashPosition + 1);
-}
-
 function get_acc_type()
 {
     if (!isset($_SESSION['acc_type'])) {

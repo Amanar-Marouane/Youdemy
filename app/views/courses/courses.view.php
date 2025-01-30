@@ -72,17 +72,17 @@
             <div class="mt-12 flex justify-center">
                 <nav class="flex items-center space-x-2">
                     <?php if ($index != 1): ?>
-                        <a href="/courses?<?= $index - 1 ?>" class="px-3 py-2 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700">
+                        <a href="/courses/<?= $index - 1 ?>" class="px-3 py-2 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700">
                             <i data-feather="chevron-left" class="w-5 h-5"></i>
                         </a>
                     <?php endif; ?>
 
                     <?php for ($i = $index, $max = 0; $i <= $total_pages && $max < 5; $i++, $max++): ?>
-                        <a href="/courses?<?= $i ?>" class="px-4 py-2 rounded-lg  <?= $index === $i ? "bg-indigo-900" : "bg-indigo-600" ?> text-white"><?= $i ?></a>
+                        <a href="/courses/<?= $i ?>" class="px-4 py-2 rounded-lg  <?= $index === $i ? "bg-indigo-900" : "bg-indigo-600" ?> text-white"><?= $i ?></a>
                     <?php endfor; ?>
 
                     <?php if ($index != $total_pages): ?>
-                        <a href="/courses?<?= $index + 1 ?>" class="px-3 py-2 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700">
+                        <a href="/courses/<?= $index + 1 ?>" class="px-3 py-2 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700">
                             <i data-feather="chevron-right" class="w-5 h-5"></i>
                         </a>
                     <?php endif; ?>
