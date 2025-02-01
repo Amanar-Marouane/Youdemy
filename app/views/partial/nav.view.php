@@ -24,7 +24,7 @@
                             <a href="/home" class="<?php if ("home" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Home</a>
                         </li>
                         <li>
-                            <a href="/courses" class="<?php if ("courses" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Courses</a>
+                            <a href="/courses/1" class="<?php if ("courses" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Courses</a>
                         </li>
                         <li>
                             <a href="#" class="<?php if ("#" === getURI()): ?>text-white<?php else: ?> text-gray-300 <?php endif; ?> block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-indigo-500 md:p-0">Categories</a>
